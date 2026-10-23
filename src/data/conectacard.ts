@@ -1,0 +1,276 @@
+export interface BiositeLink {
+  id: string;
+  title: string;
+  image: string;
+  url: string | null;
+}
+
+export interface CatalogoItem {
+  id: string;
+  title: string;
+  image: string;
+  price?: string;
+  description?: string;
+}
+
+export interface FaqItem {
+  id: string;
+  pergunta: string;
+  resposta: string;
+}
+
+export interface BiositeData {
+  slug: string;
+  name: string;
+  bio: string;
+  banner: {
+    src: string;
+    alt: string;
+  };
+  avatar: {
+    src: string;
+    alt: string;
+  };
+  video: {
+    title: string;
+    poster: string;
+    url: string;
+  };
+  produtos: {
+    title: string;
+    image: string;
+    url: string;
+  };
+  catalogo: {
+    title: string;
+    items: CatalogoItem[];
+  };
+  linksTitulo: string;
+  links: BiositeLink[];
+  servicos: {
+    title: string;
+    text: string;
+    items: BiositeLink[];
+  };
+  mapa: {
+    title: string;
+    link: string;
+    embed: string;
+  };
+  contato: {
+    local: string;
+    telefone: string;
+    email: string;
+  };
+  footer: string;
+  atendimento: {
+    saudacao: string;
+    conhecimento: string;
+    empresa: FaqItem[];
+    produtos: FaqItem[];
+  };
+  seo: {
+    title: string;
+    description: string;
+  };
+}
+
+export const conectacardData: BiositeData = {
+  slug: "start-mkt-local",
+  name: "Conectacard Cartão NFC",
+  bio: "Conectacard – Seu Cartão NFC Infinito. Conecte-se com estilo, tecnologia e praticidade. Com o cartão Conectacard NFC infinito você compartilha seus contatos, localização, redes sociais e muito mais com um simples toque. Cartões NFC personalizados, biolinks para Instagram e WhatsApp, além de plaquinhas com QR Code | NFC. Para destacar sua presença em qualquer lugar. Modernize sua forma de conectar. Peça seu Conectacard cartão NFC infinito agora! 💳",
+  banner: {
+    src: "/assets/banner-conectacard-BVojeopm.jpg",
+    alt: "Mãos segurando o cartão NFC Conectacard e um celular"
+  },
+  avatar: {
+    src: "/assets/logo-conectacard-Bp31Uc4f.jpg",
+    alt: "Logo ConectaCard"
+  },
+  video: {
+    title: "Conectacard",
+    poster: "/assets/video-refined-BgPRCMsH.jpg",
+    url: "https://youtube.com/shorts/IJHT-lXmDaU"
+  },
+  produtos: {
+    title: "Nossos Produtos",
+    image: "/assets/produtos-superlimpo-2KK8JWDt.png",
+    url: "https://superlimpoprodutosdelimpeza.lovable.app/"
+  },
+  catalogo: {
+    title: "Produtos",
+    items: [
+      {
+        id: "tabela-de-precos",
+        title: "Tabela de Preço",
+        image: "/assets/produto-tabela-precos-FOBjNveZ.jpg",
+        description: "Confira a tabela completa de produtos de limpeza e preços especiais direto de fábrica."
+      },
+      {
+        id: "desinfetante",
+        title: "Desinfetante",
+        image: "/assets/produto-desinfetante-DSB2befn.jpg",
+        price: "R$ 15,00",
+        description: "Desinfetante perfumado 5 litros de alto rendimento com aromas duradouros."
+      },
+      {
+        id: "agua-sanitaria",
+        title: "Água Sanitária",
+        image: "/assets/produto-agua-sanitaria-aqkcM0KF.jpg",
+        price: "R$ 12,00",
+        description: "Água Sanitária 5 litros com ação bactericida potente para higienização completa."
+      },
+      {
+        id: "kit-de-produtos",
+        title: "Kit de Produtos",
+        image: "/assets/produto-kit-W498VUC5.jpg",
+        price: "R$ 38,00",
+        description: "Kit Econômico: Água Sanitária 5L + Desinfetante 5L + Sabão de Álcool 5L por apenas R$ 38,00."
+      },
+      {
+        id: "desincrust",
+        title: "Desincrust",
+        image: "/assets/produto-desincrust-FLyMIkA4.jpg",
+        price: "R$ 30,00",
+        description: "Desincrustante profissional 5 litros para remoção pesada de sujidades e resíduos."
+      },
+      {
+        id: "sabao-de-alcool",
+        title: "Sabão de Álcool",
+        image: "/assets/produto-sabao-alcool-DQUNx1Kp.jpg",
+        price: "R$ 15,00",
+        description: "Sabão de Álcool 5 litros formulado com óleo novo, excelente poder de desengorduramento."
+      }
+    ]
+  },
+  linksTitulo: "Nossos links",
+  links: [
+    {
+      id: "whatsapp",
+      title: "WhatsApp",
+      image: "/assets/whatsapp-refined-CgyhsBcW.jpg",
+      url: "https://wa.me/5567993174612"
+    },
+    {
+      id: "location",
+      title: "Nossa Localização",
+      image: "/assets/location-refined-DWPeLfoT.jpg",
+      url: "https://maps.app.goo.gl/H2ryHrEQQBdfYkTw5"
+    },
+    {
+      id: "google",
+      title: "Nosso Perfil no Google",
+      image: "/assets/google-refined-DXn0GVJk.jpg",
+      url: "https://g.co/kgs/e9wwCVY"
+    },
+    {
+      id: "review",
+      title: "Avalie nossa empresa no Google",
+      image: "/assets/review-refined-BTSPoTYD.jpg",
+      url: "https://g.page/r/CRV6qIFyKdSEEBM/review"
+    },
+    {
+      id: "instagram",
+      title: "Instagram",
+      image: "/assets/instagram-refined-BsHeVKuq.jpg",
+      url: "https://instagram.com/conectacardpp"
+    },
+    {
+      id: "website",
+      title: "Nosso Site Start Mkt Local",
+      image: "/assets/website-refined-BhyhUZGx.jpg",
+      url: "https://www.startmktlocal.com.br/"
+    }
+  ],
+  servicos: {
+    title: "Nossos Serviços",
+    text: "Otimização para Motores de Busca - SEO & Tráfego Pago em Ponta Porã MS. Somos uma Agência de Marketing Digital Especializada em SEO (Search Engine Optimization), Google meu negócio e Tráfego Pago. Atuamos em Ponta Porã MS.",
+    items: [
+      {
+        id: "criacao-de-sites",
+        title: "Criação de Sites",
+        image: "/assets/servico-criacao-de-sites-wmrW9X2R.png",
+        url: null
+      },
+      {
+        id: "perfil-google",
+        title: "Criação de Perfil de empresas no Google",
+        image: "/assets/servico-perfil-google-C8tRfPuC.png",
+        url: null
+      },
+      {
+        id: "trafego-pago",
+        title: "Tráfego Pago",
+        image: "/assets/servico-trafego-pago-BLSSSAAg.png",
+        url: null
+      },
+      {
+        id: "avaliacard",
+        title: "AvaliaCard cartão NFC de avaliações do Google",
+        image: "/assets/servico-avaliacard-r6XzNPQD.png",
+        url: "https://avaliacard.vercel.app/"
+      }
+    ]
+  },
+  mapa: {
+    title: "Start Mkt Local no Google Maps",
+    link: "https://maps.google.com/?cid=9571320679847459349",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.426280186347!2d-55.7132969254635!3d-22.52569892436112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94626fc36a5e31cf%3A0x84d4297281a87a15!2sStart%20Mkt%20Local%20-%20Ag%C3%AAncia%20de%20marketing!5e0!3m2!1spt-BR!2sbr!4v1762298523594!5m2!1spt-BR!2sbr"
+  },
+  contato: {
+    local: "Start Mkt Local Ponta Porã MS",
+    telefone: "67993174612",
+    email: "startmktlocal@gmail.com"
+  },
+  footer: "Conectacard Cartão NFC",
+  atendimento: {
+    saudacao: "Olá! Qual é a sua dúvida?",
+    conhecimento: `Fazemos criação de Sites, plaquinhas NFC e QR Code, placas de avaliação do Google, biosite com atendente virtual e inteligência artificial. Tenha todos os seus links e redes sociais em um só lugar. Não são aqueles chats de aperte 1 ou 2, são respostas reais. Somos uma empresa de Ponta Porã e atendemos presencialmente toda a fronteira. E atendimento a todo Brasil via Correios.
+SUPERLIMPO PRODUTOS DE LIMPEZA: vendemos produtos de limpeza. WhatsApp (67) 99834-2469 (https://api.whatsapp.com/send?phone=5567998342469). Site: https://superlimpoprodutosdelimpeza.lovable.app/. Não temos loja física; fazemos apenas entrega em toda Ponta Porã e Pedro Juan Caballero. Dependendo da distância e do pedido pode haver uma pequena taxa de entrega, mas a maioria das entregas não tem custo.
+Tabela de produtos Superlimpo — Linha dona de casa: Kit de Produtos (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) os 3 por R$ 38,00; Água sanitária 5 litros R$ 12,00; Cloro Ativo 12% 5 litros R$ 45,00; Desinfetante Perfumado 5 litros R$ 15,00; Sabão de álcool (feito com óleo novo) 5 litros R$ 15,00; Sabão Lava Roupas Azul R$ 35,00; Amaciante de roupa 5 litros R$ 25,00; Alvejante sem cloro 5 litros (tipo Vanish) R$ 30,00; Lava louças 5 litros R$ 25,00; Limpa Pedras 5 litros R$ 30,00; Limpa Porcelanato & Cerâmica 5 litros R$ 30,00.
+Linha empresas: Limpa Chapas 5 litros R$ 30,00; Brilho alumínio 5 litros R$ 30,00; Shampoo Automotivo 5 litros R$ 30,00; Desengraxante Automotivo 5 litros R$ 30,00; Ativado 5L R$ 30,00.`,
+    empresa: [
+      {
+        id: "sobre",
+        pergunta: "O que a empresa oferece?",
+        resposta: "A Conectacard oferece cartões NFC personalizados, biolinks para Instagram e WhatsApp e plaquinhas com QR Code e NFC. A Start Mkt Local também oferece criação de sites, perfil de empresas no Google, SEO e tráfego pago."
+      },
+      {
+        id: "local",
+        pergunta: "Onde vocês estão?",
+        resposta: "Start Mkt Local, em Ponta Porã, MS. Você encontra nossa localização no mapa abaixo e pode nos visitar ou agendar uma consultoria presencial na região de fronteira!"
+      },
+      {
+        id: "contato",
+        pergunta: "Como entro em contato?",
+        resposta: "WhatsApp: (67) 99317-4612. E-mail: startmktlocal@gmail.com. Atendemos de segunda a sábado com suporte ágil para tirar todas as dúvidas."
+      }
+    ],
+    produtos: [
+      {
+        id: "nfc",
+        pergunta: "Como funciona o cartão NFC?",
+        resposta: "Com um simples toque do cartão em qualquer celular moderno compatível com NFC (iPhone ou Android), seus contatos, localização, redes sociais e catálogo abrem instantaneamente na tela, sem precisar digitar nada ou baixar aplicativos!"
+      },
+      {
+        id: "personalizado",
+        pergunta: "O cartão é personalizado?",
+        resposta: "Sim! A Conectacard oferece cartões NFC 100% personalizados com a identidade visual da sua marca, logotipo, cores, além de biolinks e plaquinhas com QR Code e NFC para balcões e mesas. Fale conosco pelo WhatsApp para combinar os detalhes da sua arte."
+      },
+      {
+        id: "produtos",
+        pergunta: "Quais produtos de limpeza aparecem no cartão?",
+        resposta: "A seção da Superlimpo apresenta Desinfetante, Água Sanitária, Kit de Produtos (com 3 galões de 5L), Desincrust e Sabão de Álcool. O botão azul 'Nossos Produtos' abre o catálogo completo da fábrica com entregas em Ponta Porã e Pedro Juan Caballero."
+      },
+      {
+        id: "orcamento",
+        pergunta: "Quanto custam os produtos Superlimpo?",
+        resposta: "Kit Econômico com Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L por apenas R$ 38,00! Água sanitária 5L R$ 12,00; Desinfetante 5L R$ 15,00; Sabão de álcool 5L R$ 15,00; Amaciante 5L R$ 25,00; Lava louças 5L R$ 25,00; Alvejante sem cloro 5L R$ 30,00; Cloro Ativo 12% 5L R$ 45,00. Linha empresas sai por R$ 30,00 cada 5L com entrega rápida."
+      }
+    ]
+  },
+  seo: {
+    title: "Conectacard Cartão NFC | Cartão de visitas inteligente",
+    description: "Cartão NFC infinito Conectacard: compartilhe contatos, localização e redes sociais com um toque. Biolinks e plaquinhas QR Code | NFC."
+  }
+};
