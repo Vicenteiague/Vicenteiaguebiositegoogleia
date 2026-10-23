@@ -98,7 +98,7 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
     if (!textToSend) setInputVal("");
     setIsTyping(true);
 
-    // If it is an exact preset chip, answer immediately
+    // Fast-path: If it is an exact preset chip, answer immediately
     const preset = presetQuestions.find(
       (p) => p.pergunta.toLowerCase() === query.toLowerCase()
     );
@@ -109,7 +109,25 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
           { id: "a-" + Date.now(), role: "assistant", text: preset.resposta },
         ]);
         setIsTyping(false);
-      }, 350);
+      }, 250);
+      return;
+    }
+
+    // Fast-path: Common greetings (0ms wait)
+    const norm = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    const greetings = ["oi", "ola", "bom dia", "boa tarde", "boa noite", "opa", "e ai", "tudo bem", "ola tudo bem"];
+    if (greetings.includes(norm)) {
+      setTimeout(() => {
+        setCurMessages((prev) => [
+          ...prev,
+          {
+            id: "a-" + Date.now(),
+            role: "assistant",
+            text: `Olá! Como posso ajudar você hoje com a ${data.name}? Fique à vontade para perguntar sobre o cartão NFC, tabela de preços, entregas ou serviços da agência!`,
+          },
+        ]);
+        setIsTyping(false);
+      }, 300);
       return;
     }
 
@@ -133,7 +151,7 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
 
       if (res.ok) {
         const json = await res.json();
-        if (json.reply) {
+        if (json.reply && !json.isFallback) {
           setCurMessages((prev) => [
             ...prev,
             { id: "a-" + Date.now(), role: "assistant", text: json.reply },
