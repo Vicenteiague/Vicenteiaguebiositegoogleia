@@ -45,28 +45,45 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
   const findSmartResponse = (query: string): string => {
     const q = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+    // Superlimpo specific rules
+    if (q.includes("horario") || q.includes("que horas") || q.includes("sabado") || (q.includes("entrega") && (q.includes("hora") || q.includes("quando")))) {
+      return "As entregas da Superlimpo são feitas até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas em toda Ponta Porã e Pedro Juan Caballero.";
+    }
+
+    if (q.includes("nota") || q.includes("fiscal") || q.includes("recibo") || q.includes("comprovante")) {
+      return "Não temos Nota Fiscal, apenas Recibo.";
+    }
+
+    if (q.includes("taxa") || q.includes("frete") || (q.includes("quanto") && q.includes("entrega"))) {
+      return "Dependendo da distância e do pedido existe uma pequena taxa de entrega. Mas a maioria das entregas não tem custo!";
+    }
+
+    if (q.includes("loja") || q.includes("fisica") || q.includes("onde fica a loja")) {
+      return "Não temos loja física. Trabalhamos exclusivamente com entregas em toda a região de Ponta Porã e Pedro Juan Caballero!";
+    }
+
+    if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("sabao") || q.includes("desinfetante") || q.includes("cloro") || q.includes("amaciante") || q.includes("kit")) {
+      return "Somos a Superlimpo vendemos produtos de limpeza!\n\nTabela Linha dona de casa:\n• Kit com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) os 3 por R$ 38,00\n• Água sanitária 5L: R$ 12,00\n• Cloro Ativo 12% 5L: R$ 45,00\n• Desinfetante Perfumado 5L: R$ 15,00\n• Sabão de álcool (óleo novo) 5L: R$ 15,00\n• Sabão Lava Roupas Azul: R$ 35,00\n• Amaciante de roupa 5L: R$ 25,00\n• Alvejante sem cloro 5L (Tipo Vanish): R$ 30,00\n• Lava louças 5L: R$ 25,00\n• Limpa Pedras 5L: R$ 30,00\n• Limpa Porcelanato & Cerâmica 5L: R$ 30,00\n\nLinha empresas (5L por R$ 30,00 cada):\n• Limpa Chapas, Brilho Alumínio, Shampoo Automotivo, Desengraxante Automotivo e Ativado 5L.\n\nWhatsApp Superlimpo: https://api.whatsapp.com/send?phone=5567998342469";
+    }
+
     if (q.includes("servico") || q.includes("quais sao os servicos") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
       return "A Start Mkt Local e a Conectacard oferecem:\n\n• Cartões NFC Infinitos e Plaquinhas QR Code personalizadas\n• Criação de Sites profissionais e Landing Pages\n• Otimização de Perfil de Empresas no Google (Google Meu Negócio)\n• AvaliaCard: Placa NFC para avaliações 5 estrelas no Google\n• Gestão de Tráfego Pago (anúncios no Google e Meta)\n• Linha Superlimpo de produtos de limpeza direto de fábrica em Ponta Porã!";
     }
 
-    if (q.includes("quanto custa") || q.includes("preco") || q.includes("valor") || q.includes("tabela") || q.includes("orcamento")) {
-      return "Tabela de Valores:\n\n• Cartão NFC Conectacard: a partir de R$ 149 (pagamento único, sem mensalidade obrigatória).\n• Kit Dona de Casa Superlimpo (3 galões de 5L): apenas R$ 38,00!\n• Galões avulsos 5L: Água Sanitária R$ 12 | Desinfetante R$ 15 | Sabão de Álcool R$ 15 | Amaciante R$ 25.\n\nPara projetos de sites, tráfego pago ou orçamentos sob medida, fale conosco no WhatsApp!";
-    }
-
-    if (q.includes("falar com alguem") || q.includes("humano") || q.includes("atendente") || q.includes("whatsapp") || q.includes("contato") || q.includes("telefone")) {
-      return "Com certeza! Nossa equipe de atendimento humano está à disposição no WhatsApp (67) 99317-4612. Basta tocar no botão 'Falar pelo WhatsApp' logo abaixo para iniciar a conversa!";
+    if (q.includes("preco do cartao") || q.includes("valor do cartao") || q.includes("quanto custa o cartao")) {
+      return "O Cartão NFC Conectacard individual sai a partir de R$ 149 (pagamento único, sem mensalidade obrigatória). Para modelos personalizados com sua logo, fale conosco no WhatsApp!";
     }
 
     if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("funciona o cartao")) {
       return "O Cartão NFC Conectacard possui tecnologia por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!";
     }
 
-    if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("sabao") || q.includes("desinfetante")) {
-      return "A Superlimpo é nossa linha de produtos de limpeza direto de fábrica em Ponta Porã! Temos galões de 5L de alta concentração: Água Sanitária, Desinfetante, Sabão de Álcool, Amaciante, Cloro 12%, Lava Roupas e Desincrustante. Entregamos em toda Ponta Porã e Pedro Juan Caballero!";
+    if (q.includes("falar com alguem") || q.includes("humano") || q.includes("atendente") || q.includes("whatsapp") || q.includes("contato") || q.includes("telefone")) {
+      return "Com certeza! Para falar sobre produtos de limpeza Superlimpo: https://api.whatsapp.com/send?phone=5567998342469 (67) 99834-2469. Para Cartões NFC e serviços: WhatsApp (67) 99317-4612!";
     }
 
     if (q.includes("entrega") || q.includes("frete") || q.includes("onde entrega") || q.includes("fronteira") || q.includes("correios")) {
-      return "Fazemos entrega de produtos de limpeza em toda Ponta Porã e Pedro Juan Caballero (a maioria sem custo de entrega). E enviamos os Cartões NFC Conectacard para todo o Brasil via Correios com código de rastreamento!";
+      return "Produtos de limpeza Superlimpo: entregas até às 16h (sábados às 7h e 15:30h) em Ponta Porã e Pedro Juan Caballero. Cartões NFC: envio para todo o Brasil via Correios!";
     }
 
     if (q.includes("onde") || q.includes("endereco") || q.includes("localizacao") || q.includes("cidade") || q.includes("fica")) {
@@ -77,7 +94,8 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
       return "Sim! Nossos cartões e plaquinhas são 100% personalizados com o logotipo, cores e identidade visual da sua marca com acabamento premium.";
     }
 
-    return "Obrigada pelo contato! Como assistente virtual inteligente LIA, estou aqui para apresentar nossos serviços, cartões NFC e produtos. Se quiser tirar dúvidas específicas com nosso time, toque no botão 'Falar pelo WhatsApp' abaixo!";
+    // Regra obrigatória: não inventar, não alucinar. Se não souber, passar para humano com link
+    return "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469";
   };
 
   const handleSend = async (textToSend?: string) => {

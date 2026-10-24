@@ -275,12 +275,191 @@ Trabalhamos com genéricos com até 70% de desconto.`,
     ...conectacardData,
     slug: "superlimpo",
     name: "Superlimpo Produtos de Limpeza",
-    bio: "FÁBRICA E DISTRIBUIÇÃO DE PRODUTOS DE LIMPEZA EM PONTA PORÃ E PEDRO JUAN CABALLERO. ENTREGAS RÁPIDAS DIRETAS NA SUA CASA OU EMPRESA. KITS ECONÔMICOS, DESINFETANTES, SABÃO DE ÁLCOOL E LINHA PROFISSIONAL! 🧼✨",
+    bio: "SOMOS A SUPERLIMPO, VENDEMOS PRODUTOS DE LIMPEZA DIRETO DE FÁBRICA. ENTREGAS EM TODA REGIÃO DE PONTA PORÃ E PEDRO JUAN CABALLERO. KITS ECONÔMICOS, LINHA DONA DE CASA E LINHA EMPRESAS! 🧼✨",
     avatar: {
       src: "/assets/produtos-superlimpo-2KK8JWDt.png",
       alt: "Logo Superlimpo"
     },
     linksTitulo: "Fale com a Superlimpo",
+    links: [
+      {
+        id: "sl-wa",
+        title: "WhatsApp Superlimpo (67) 99834-2469",
+        image: "/assets/whatsapp-refined-CgyhsBcW.jpg",
+        url: "https://api.whatsapp.com/send?phone=5567998342469"
+      },
+      {
+        id: "sl-site",
+        title: "Nosso Site Oficial",
+        image: "/assets/website-refined-BhyhUZGx.jpg",
+        url: "https://superlimpoprodutosdelimpeza.lovable.app/"
+      },
+      {
+        id: "sl-maps",
+        title: "Região de Entrega Ponta Porã e PJC",
+        image: "/assets/location-refined-DWPeLfoT.jpg",
+        url: "https://maps.google.com/?q=Ponta+Pora+MS"
+      }
+    ],
+    catalogo: {
+      title: "Tabela de Produtos Superlimpo",
+      items: [
+        {
+          id: "kit-3",
+          title: "Kit Dona de Casa (3 galões de 5L)",
+          price: "R$ 38,00",
+          image: "/assets/produto-kit-W498VUC5.jpg",
+          description: "Kit Econômico: Água Sanitária 5L + Desinfetante 5L + Sabão de Álcool 5L todos os 3 por R$ 38,00."
+        },
+        {
+          id: "agua-sanitaria-5l",
+          title: "Água Sanitária 5 Litros",
+          price: "R$ 12,00",
+          image: "/assets/produto-agua-sanitaria-aqkcM0KF.jpg",
+          description: "Água Sanitária 5L com ação bactericida potente para higienização completa."
+        },
+        {
+          id: "cloro-ativo",
+          title: "Cloro Ativo 12% 5 Litros",
+          price: "R$ 45,00",
+          image: "/assets/produto-agua-sanitaria-aqkcM0KF.jpg",
+          description: "Cloro concentrado 12% de uso profissional e doméstico para desinfecção profunda."
+        },
+        {
+          id: "desinfetante-5l",
+          title: "Desinfetante Perfumado 5 Litros",
+          price: "R$ 15,00",
+          image: "/assets/produto-desinfetante-DSB2befn.jpg",
+          description: "Desinfetante perfumado 5L de alto rendimento com perfume duradouro."
+        },
+        {
+          id: "sabao-alcool-5l",
+          title: "Sabão de Álcool (óleo novo) 5 Litros",
+          price: "R$ 15,00",
+          image: "/assets/produto-sabao-alcool-DQUNx1Kp.jpg",
+          description: "Feito exclusivamente com óleo novo, alto poder de limpeza e desengordurante."
+        },
+        {
+          id: "sabao-azul",
+          title: "Sabão Lava Roupas Azul 5 Litros",
+          price: "R$ 35,00",
+          image: "/assets/produto-desincrust-FLyMIkA4.jpg",
+          description: "Lava roupas líquido concentrado para roupas brancas e coloridas."
+        },
+        {
+          id: "amaciante-5l",
+          title: "Amaciante de Roupa 5 Litros",
+          price: "R$ 25,00",
+          image: "/assets/produto-desinfetante-DSB2befn.jpg",
+          description: "Maciez e perfume prolongado para suas roupas."
+        },
+        {
+          id: "alvejante-sem-cloro",
+          title: "Alvejante sem Cloro 5 Litros (Tipo Vanish)",
+          price: "R$ 30,00",
+          image: "/assets/produto-desincrust-FLyMIkA4.jpg",
+          description: "Alvejante com oxigênio ativo para remoção de manchas sem agredir tecidos."
+        },
+        {
+          id: "lava-loucas-5l",
+          title: "Lava Louças 5 Litros",
+          price: "R$ 25,00",
+          image: "/assets/produto-desinfetante-DSB2befn.jpg",
+          description: "Detergente concentrado com alto rendimento para louças e utensílios."
+        },
+        {
+          id: "limpa-pedras-5l",
+          title: "Limpa Pedras 5 Litros",
+          price: "R$ 30,00",
+          image: "/assets/produto-desincrust-FLyMIkA4.jpg",
+          description: "Desincrustante ácido para calçadas, pedras e pisos rústicos."
+        },
+        {
+          id: "limpa-porcelanato",
+          title: "Limpa Porcelanato & Cerâmica 5 Litros",
+          price: "R$ 30,00",
+          image: "/assets/produto-desincrust-FLyMIkA4.jpg",
+          description: "Fórmula balanceada para limpeza de porcelanatos sem tirar o brilho natural."
+        },
+        {
+          id: "linha-empresas",
+          title: "Linha Empresas 5 Litros",
+          price: "R$ 30,00",
+          image: "/assets/produto-desincrust-FLyMIkA4.jpg",
+          description: "Opções: Limpa Chapas (R$ 30), Brilho Alumínio (R$ 30), Shampoo Automotivo (R$ 30), Desengraxante Automotivo (R$ 30) e Ativado 5L (R$ 30)."
+        }
+      ]
+    },
+    atendimento: {
+      saudacao: "Olá! Como posso ajudar você hoje com os produtos Superlimpo?",
+      conhecimento: `Somos a Superlimpo vendemos produtos de limpeza.
+WhatsApp: (67) 99834-2469
+Link WhatsApp: https://api.whatsapp.com/send?phone=5567998342469
+Nosso Site: https://superlimpoprodutosdelimpeza.lovable.app/
+Não tem loja física. Apenas entrega em toda região de Ponta Porã e Pedro Juan Caballero.
+As entregas são feitas até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas.
+Não temos Nota Fiscal apenas Recibo.
+Dependendo da distância e do pedido existe uma pequena taxa de entrega. Mas a maioria das entregas não tem custo.
+
+Tabela de produtos Superlimpo:
+Linha dona de casa:
+- Kit de Produto com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) todos os 3 por R$ 38,00
+- Água sanitária 5 litros R$ 12,00
+- Cloro Ativo 12% 5 litros R$ 45,00
+- Desinfetante Perfumado 5 litros R$ 15,00
+- Sabão de álcool (Feito com óleo novo) 5 litros R$ 15,00
+- Sabão Lava Roupas Azul R$ 35,00
+- Amaciante de roupa 5 litros R$ 25,00
+- Alvejante sem cloro 5 litros (Tipo Vanish) R$ 30,00
+- Lava louças 5 litros R$ 25,00
+- Limpa Pedras 5 litros R$ 30,00
+- Limpa Porcelanato & Cerâmica 5 litros R$ 30,00
+
+Linha empresas:
+- Limpa Chapas 5 litros R$ 30,00
+- Brilho alumínio 5 litros R$ 30,00
+- Shampoo Automotivo 5 litros R$ 30,00
+- Desengraxante Automotivo 5 litros R$ 30,00
+- Ativado 5L R$ 30,00
+
+IMPORTANTE:
+NÃO INVENTAR. NÃO ALUCINAR.
+SE NÃO SOUBER DIGA: "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469".`,
+      empresa: [
+        {
+          id: "sl1",
+          pergunta: "Tem loja física?",
+          resposta: "Não temos loja física. Trabalhamos exclusivamente com entrega em domicílio e empresas em toda Ponta Porã e Pedro Juan Caballero."
+        },
+        {
+          id: "sl2",
+          pergunta: "Quais os horários de entrega?",
+          resposta: "As entregas são feitas até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas."
+        },
+        {
+          id: "sl3",
+          pergunta: "Emitem nota fiscal?",
+          resposta: "Não temos Nota Fiscal, apenas Recibo."
+        },
+        {
+          id: "sl4",
+          pergunta: "Cobram taxa de entrega?",
+          resposta: "Dependendo da distância e do pedido existe uma pequena taxa de entrega, mas a maioria das entregas não tem custo!"
+        }
+      ],
+      produtos: [
+        {
+          id: "slp1",
+          pergunta: "Qual o valor do kit dona de casa?",
+          resposta: "O Kit Dona de Casa vem com Água Sanitária 5L + Desinfetante 5L + Sabão de Álcool 5L (todos os 3 galões) por apenas R$ 38,00!"
+        },
+        {
+          id: "slp2",
+          pergunta: "Como pedir pelo WhatsApp?",
+          resposta: "Basta clicar no link https://api.whatsapp.com/send?phone=5567998342469 ou adicionar o número (67) 99834-2469 para enviar seu pedido."
+        }
+      ]
+    },
     contato: {
       local: "Ponta Porã MS e Pedro Juan Caballero",
       telefone: "67998342469",

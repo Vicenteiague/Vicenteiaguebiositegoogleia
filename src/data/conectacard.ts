@@ -225,10 +225,44 @@ export const conectacardData: BiositeData = {
   footer: "Conectacard Cartão NFC",
   atendimento: {
     saudacao: "Olá! Qual é a sua dúvida?",
-    conhecimento: `Fazemos criação de Sites, plaquinhas NFC e QR Code, placas de avaliação do Google, biosite com atendente virtual e inteligência artificial. Tenha todos os seus links e redes sociais em um só lugar. Não são aqueles chats de aperte 1 ou 2, são respostas reais. Somos uma empresa de Ponta Porã e atendemos presencialmente toda a fronteira. E atendimento a todo Brasil via Correios.
-SUPERLIMPO PRODUTOS DE LIMPEZA: vendemos produtos de limpeza. WhatsApp (67) 99834-2469 (https://api.whatsapp.com/send?phone=5567998342469). Site: https://superlimpoprodutosdelimpeza.lovable.app/. Não temos loja física; fazemos apenas entrega em toda Ponta Porã e Pedro Juan Caballero. Dependendo da distância e do pedido pode haver uma pequena taxa de entrega, mas a maioria das entregas não tem custo.
-Tabela de produtos Superlimpo — Linha dona de casa: Kit de Produtos (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) os 3 por R$ 38,00; Água sanitária 5 litros R$ 12,00; Cloro Ativo 12% 5 litros R$ 45,00; Desinfetante Perfumado 5 litros R$ 15,00; Sabão de álcool (feito com óleo novo) 5 litros R$ 15,00; Sabão Lava Roupas Azul R$ 35,00; Amaciante de roupa 5 litros R$ 25,00; Alvejante sem cloro 5 litros (tipo Vanish) R$ 30,00; Lava louças 5 litros R$ 25,00; Limpa Pedras 5 litros R$ 30,00; Limpa Porcelanato & Cerâmica 5 litros R$ 30,00.
-Linha empresas: Limpa Chapas 5 litros R$ 30,00; Brilho alumínio 5 litros R$ 30,00; Shampoo Automotivo 5 litros R$ 30,00; Desengraxante Automotivo 5 litros R$ 30,00; Ativado 5L R$ 30,00.`,
+    conhecimento: `BANCO DE DADOS 1 - CONECTACARD & START MKT LOCAL:
+Fazemos criação de Sites profissionais, plaquinhas NFC e QR Code, placas de avaliação do Google (AvaliaCard), biosite com atendente virtual e inteligência artificial. Tenha todos os seus links e redes sociais em um só lugar. Não são aqueles chats de aperte 1 ou 2, são respostas reais. Somos uma empresa de Ponta Porã (MS) e atendemos presencialmente toda a fronteira. E atendimento a todo Brasil via Correios com código de rastreamento.
+Contato Conectacard: WhatsApp (67) 99317-4612, E-mail: startmktlocal@gmail.com, Site: https://www.startmktlocal.com.br/
+
+BANCO DE DADOS 2 - SUPERLIMPO PRODUTOS DE LIMPEZA:
+Somos a Superlimpo vendemos produtos de limpeza.
+WhatsApp: (67) 99834-2469
+Link WhatsApp: https://api.whatsapp.com/send?phone=5567998342469
+Nosso Site: https://superlimpoprodutosdelimpeza.lovable.app/
+Não tem loja física. Apenas entrega em toda região de Ponta Porã e Pedro Juan Caballero.
+Horários de entrega: As entregas são feitas até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas.
+Nota Fiscal: Não temos Nota Fiscal apenas Recibo.
+Taxa de entrega: Dependendo da distância e do pedido existe uma pequena taxa de entrega. Mas a maioria das entregas não tem custo.
+
+Tabela de produtos Superlimpo:
+Linha dona de casa:
+- Kit de Produto com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) todos os 3 por R$ 38,00
+- Água sanitária 5 litros: R$ 12,00
+- Cloro Ativo 12% 5 litros: R$ 45,00
+- Desinfetante Perfumado 5 litros: R$ 15,00
+- Sabão de álcool (Feito com óleo novo) 5 litros: R$ 15,00
+- Sabão Lava Roupas Azul: R$ 35,00
+- Amaciante de roupa 5 litros: R$ 25,00
+- Alvejante sem cloro 5 litros (Tipo Vanish): R$ 30,00
+- Lava louças 5 litros: R$ 25,00
+- Limpa Pedras 5 litros: R$ 30,00
+- Limpa Porcelanato & Cerâmica 5 litros: R$ 30,00
+
+Linha empresas:
+- Limpa Chapas 5 litros: R$ 30,00
+- Brilho alumínio 5 litros: R$ 30,00
+- Shampoo Automotivo 5 litros: R$ 30,00
+- Desengraxante Automotivo 5 litros: R$ 30,00
+- Ativado 5L: R$ 30,00
+
+REGRA OBRIGATÓRIA DA IA:
+NÃO INVENTAR. NÃO ALUCINAR.
+SE NÃO SOUBER com certeza a resposta, diga exatamente: "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469".`,
     empresa: [
       {
         id: "sobre",
@@ -265,7 +299,27 @@ Linha empresas: Limpa Chapas 5 litros R$ 30,00; Brilho alumínio 5 litros R$ 30,
       {
         id: "orcamento",
         pergunta: "Quanto custam os produtos Superlimpo?",
-        resposta: "Kit Econômico com Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L por apenas R$ 38,00! Água sanitária 5L R$ 12,00; Desinfetante 5L R$ 15,00; Sabão de álcool 5L R$ 15,00; Amaciante 5L R$ 25,00; Lava louças 5L R$ 25,00; Alvejante sem cloro 5L R$ 30,00; Cloro Ativo 12% 5L R$ 45,00. Linha empresas sai por R$ 30,00 cada 5L com entrega rápida."
+        resposta: "Linha dona de casa: Kit com 3 galões 5L (Água Sanitária + Desinfetante + Sabão de Álcool) por R$ 38,00! Avulsos 5L: Água Sanitária R$ 12,00; Cloro 12% R$ 45,00; Desinfetante Perfumado R$ 15,00; Sabão de Álcool (óleo novo) R$ 15,00; Sabão Lava Roupas Azul R$ 35,00; Amaciante R$ 25,00; Alvejante sem cloro R$ 30,00; Lava louças R$ 25,00; Limpa Pedras R$ 30,00; Limpa Porcelanato R$ 30,00. Linha empresas: Limpa Chapas, Brilho alumínio, Shampoo Automotivo, Desengraxante e Ativado por R$ 30,00 cada 5L."
+      },
+      {
+        id: "horario-entrega",
+        pergunta: "Quais os horários de entrega da Superlimpo?",
+        resposta: "As entregas são feitas até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas em toda Ponta Porã e Pedro Juan Caballero."
+      },
+      {
+        id: "nota-fiscal",
+        pergunta: "Vocês emitem Nota Fiscal?",
+        resposta: "Não temos Nota Fiscal, apenas Recibo."
+      },
+      {
+        id: "taxa-entrega",
+        pergunta: "Tem taxa de entrega dos produtos de limpeza?",
+        resposta: "Dependendo da distância e do pedido existe uma pequena taxa de entrega, mas a maioria das entregas não tem custo!"
+      },
+      {
+        id: "zap-superlimpo",
+        pergunta: "Qual o WhatsApp da Superlimpo?",
+        resposta: "O WhatsApp da Superlimpo é (67) 99834-2469. Link direto: https://api.whatsapp.com/send?phone=5567998342469"
       }
     ]
   },
