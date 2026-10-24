@@ -46,17 +46,28 @@ export const handler = async (event: any) => {
   if (apiKey) {
     try {
       const ai = new GoogleGenAI({ apiKey });
-      const systemInstruction = `Você é a LIA, a assistente virtual inteligente oficial da empresa "${clientName || "Conectacard Cartão NFC"}".
-Seu objetivo é tirar dúvidas, apresentar os serviços e produtos e ajudar os clientes a encontrar a melhor solução com simpatia, rapidez, clareza e empatia em português do Brasil.
-Apresente-se com alegria como LIA sempre que apropriado.
+      const systemInstruction = `Você é a LIA, a assistente virtual inteligente oficial da BiositesAI.
+Seu objetivo é tirar dúvidas, apresentar os serviços e ajudar você a encontrar a melhor solução com simpatia, rapidez, clareza e empatia em português do Brasil.
+Apresente-se com alegria como LIA 👋.
 
-BASE DE CONHECIMENTO DA EMPRESA:
-${clientKnowledge || "Atendimento rápido, cartões NFC personalizados e suporte pelo WhatsApp."}
+MINI BANCO DE DADOS DA BIOSITESAI:
+O BiositesAI é um mini site tipo Linktree só que muito melhor. Tem um Chatbot com a LIA (você), sua Agente de IA que sabe tudo sobre sua empresa podendo fazer o atendimento enquanto você estiver ocupado. Esses sites podem ser colocados na Bio do seu Instagram, WhatsApp, em cartões NFC e plaquinhas de balcão.
+
+SERVIÇOS:
+Fazemos criação de Sites, plaquinhas NFC e QR Code, placas de avaliação do Google (AvaliaCard), biosite com atendente virtual e inteligência artificial. Tenha todos os seus links e redes sociais em um só lugar. Não são aqueles chats de aperte 1 ou 2, são respostas reais.
+Somos uma empresa de Ponta Porã (MS) e atendemos presencialmente toda a fronteira. E atendimento e envio a todo Brasil via Correios.
+
+NOSSOS PREÇOS:
+1. Biosites sem Chatbot (somente o link): Preço promocional R$ 99,00
+2. Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90/mês.
+
+O QUE É E COMO FUNCIONA UM CARTÃO NFC:
+Um cartão NFC é um cartão inteligente que, ao ser aproximado de um celular, permite abrir um site, compartilhar contatos, acessar redes sociais ou até iniciar uma conversa no WhatsApp — sem precisar digitar nada. É uma tecnologia muito usada em cartões de visita digitais e pagamentos por aproximação.
 
 Diretrizes:
-- Responda de forma direta e concisa (1 a 3 parágrafos curtos).
-- Se a pergunta for sobre preços, serviços ou produtos específicos descritos na base, forneça os detalhes exatos.
-- Se o cliente quiser falar com um atendente humano, pedir orçamento personalizado ou tirar dúvidas não listadas, convide gentilmente a pessoa a clicar no botão do WhatsApp.
+- Responda de forma direta, acolhedora e concisa (1 a 3 parágrafos curtos).
+- Se a pergunta for sobre preços, informe os valores exatos: R$ 99 (sem chatbot) ou R$ 147 (com chatbot + NFC) + manutenção a partir de R$ 49,90/mês.
+- Se o cliente quiser falar com alguém humano ou fechar pedido, convide com carinho a clicar no botão do WhatsApp.
 - Seja sempre cortês, moderna e prestativa.`;
 
       const contents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
@@ -114,20 +125,18 @@ Diretrizes:
 
   // Fallback if no API key is configured on Netlify
   const q = message.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  let reply = "Agradecemos o contato! A Conectacard oferece cartões NFC personalizados, biolinks inteligentes e soluções de marketing digital em Ponta Porã e para todo o Brasil. Para orçamentos rápidos e pedidos, fale conosco pelo botão do WhatsApp abaixo!";
+  let reply = "Olá! Eu sou a LIA 👋 O BiositesAI é um mini site tipo Linktree só que muito melhor, com Chatbot de IA, cartões NFC e plaquinhas com QR Code. Fale conosco pelo botão do WhatsApp para orçamentos e pedidos!";
 
-  if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("funciona o cartao")) {
-    reply = "Com um simples toque do cartão Conectacard em qualquer celular moderno com NFC (iPhone ou Android), seus links, WhatsApp, catálogo e redes sociais abrem instantaneamente na tela, sem necessidade de aplicativo!";
-  } else if (q.includes("personaliz") || q.includes("logo") || q.includes("arte") || q.includes("minha marca")) {
-    reply = "Sim! Nossos cartões e plaquinhas são 100% personalizados com o logotipo e identidade visual da sua marca ou empresa. Basta nos chamar no WhatsApp para definir o design.";
-  } else if (q.includes("preco") || q.includes("quanto custa") || q.includes("valor") || q.includes("tabela") || q.includes("kit")) {
-    reply = "Temos o Kit Dona de Casa Superlimpo (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) por apenas R$ 38,00! Para valores dos cartões NFC personalizados e placas para balcão, consulte nossa equipe no WhatsApp (67) 99317-4612!";
-  } else if (q.includes("entrega") || q.includes("frete") || q.includes("pedro juan") || q.includes("ponta pora")) {
-    reply = "Fazemos entrega de produtos de limpeza em toda Ponta Porã e Pedro Juan Caballero (a maioria sem custo de entrega). E enviamos os Cartões NFC Conectacard para todo o Brasil via Correios com código de rastreio!";
-  } else if (q.includes("contato") || q.includes("whatsapp") || q.includes("telefone") || q.includes("falar")) {
-    reply = "Você pode falar conosco diretamente pelo WhatsApp (67) 99317-4612 ou pelo e-mail startmktlocal@gmail.com. Estamos prontos para atender você!";
-  } else if (q.includes("site") || q.includes("google") || q.includes("seo") || q.includes("trafego") || q.includes("marketing")) {
-    reply = "A Start Mkt Local é especializada em Criação de Sites profissionais, Perfil de Empresas no Google Meu Negócio, Otimização de SEO e Tráfego Pago (anúncios no Google e Meta) para alavancar suas vendas.";
+  if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("cartao nfc") || q.includes("funciona o cartao")) {
+    reply = "Um cartão NFC é um cartão inteligente que, ao ser aproximado de um celular, permite abrir um site, compartilhar contatos, acessar redes sociais ou até iniciar uma conversa no WhatsApp — sem precisar digitar nada. É uma tecnologia muito usada em cartões de visita digitais e pagamentos por aproximação.";
+  } else if (q.includes("servico") || q.includes("o que voces fazem") || q.includes("linktree") || q.includes("o que e")) {
+    reply = "O BiositesAI é um mini site tipo Linktree só que muito melhor! Tem um Chatbot com a LIA, sua Agente de IA que sabe tudo sobre sua empresa podendo fazer o atendimento enquanto você estiver ocupado. Fazemos criação de Sites, plaquinhas NFC e QR Code, placas de avaliação do Google e biosite com atendente virtual e inteligência artificial.";
+  } else if (q.includes("preco") || q.includes("quanto custa") || q.includes("valor") || q.includes("tabela") || q.includes("promocao")) {
+    reply = "Nossos Preços BiositesAI:\n1️⃣ Biosites sem Chatbot (somente o link): Preço promocional R$ 99,00\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90/mês.";
+  } else if (q.includes("entrega") || q.includes("onde") || q.includes("endereco") || q.includes("cidade") || q.includes("ponta pora") || q.includes("fronteira")) {
+    reply = "Somos uma empresa de Ponta Porã (MS) e atendemos presencialmente toda a fronteira. Também enviamos nossos cartões e placas NFC para todo o Brasil via Correios!";
+  } else if (q.includes("contato") || q.includes("whatsapp") || q.includes("telefone") || q.includes("falar") || q.includes("humano")) {
+    reply = "Você pode falar diretamente com nossa equipe no WhatsApp (67) 99317-4612. Toque no botão do WhatsApp abaixo para começar!";
   }
 
   return {

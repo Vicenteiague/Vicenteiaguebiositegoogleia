@@ -31,28 +31,28 @@ export interface BiositeData {
     src: string;
     alt: string;
   };
-  video?: {
+  video: {
     title: string;
     poster: string;
     url: string;
   };
-  produtos?: {
+  produtos: {
     title: string;
     image: string;
     url: string;
   };
-  catalogo?: {
+  catalogo: {
     title: string;
     items: CatalogoItem[];
   };
   linksTitulo: string;
   links: BiositeLink[];
-  servicos?: {
+  servicos: {
     title: string;
     text: string;
     items: BiositeLink[];
   };
-  mapa?: {
+  mapa: {
     title: string;
     link: string;
     embed: string;
@@ -69,7 +69,7 @@ export interface BiositeData {
     empresa: FaqItem[];
     produtos: FaqItem[];
   };
-  seo?: {
+  seo: {
     title: string;
     description: string;
   };

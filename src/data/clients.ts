@@ -1,7 +1,9 @@
 import { conectacardData, type BiositeData } from "./conectacard";
 
 export const allClients: Record<string, BiositeData> = {
-  // 1. Modelo Oficial Conectacard / Teste Geral
+  // 1. Modelo Oficial BiositesAI / Teste Geral
+  "biositesai": conectacardData,
+  "biosite": conectacardData,
   "teste": conectacardData,
   "start-mkt-local": conectacardData,
   "demo": conectacardData,
