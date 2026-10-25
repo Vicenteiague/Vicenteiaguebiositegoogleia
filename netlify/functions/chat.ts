@@ -1,5 +1,24 @@
 import { GoogleGenAI } from "@google/genai";
 
+interface CacheEntry {
+  reply: string;
+  timestamp: number;
+}
+
+const responseCache = new Map<string, CacheEntry>();
+const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours TTL
+const MAX_CACHE_SIZE = 500;
+
+function getCacheKey(msg: string, clientName?: string): string {
+  const normalized = msg
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .replace(/[?!.,;]/g, "");
+  return `${clientName || "default"}:${normalized}`;
+}
+
 export const handler = async (event: any) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -38,6 +57,17 @@ export const handler = async (event: any) => {
       statusCode: 400,
       headers,
       body: JSON.stringify({ error: "Mensagem obrigatória" }),
+    };
+  }
+
+  // 0. Cache lookup for fast repeated queries
+  const cacheKey = getCacheKey(message, clientName);
+  const cached = responseCache.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    return {
+      statusCode: 200,
+      headers: { ...headers, "X-Cache": "HIT" },
+      body: JSON.stringify({ reply: cached.reply, cached: true }),
     };
   }
 
@@ -134,10 +164,16 @@ DIRETRIZES CRÍTICAS:
       }
 
       if (reply) {
+        if (responseCache.size >= MAX_CACHE_SIZE) {
+          const firstKey = responseCache.keys().next().value;
+          if (firstKey) responseCache.delete(firstKey);
+        }
+        responseCache.set(cacheKey, { reply, timestamp: Date.now() });
+
         return {
           statusCode: 200,
           headers,
-          body: JSON.stringify({ reply }),
+          body: JSON.stringify({ reply, cached: false }),
         };
       }
     } catch (error: any) {
@@ -169,9 +205,15 @@ DIRETRIZES CRÍTICAS:
     reply = "Para atendimento de produtos de limpeza Superlimpo: WhatsApp https://api.whatsapp.com/send?phone=5567998342469 (67) 99834-2469. Para Cartões NFC e serviços de marketing: WhatsApp (67) 99317-4612.";
   }
 
+  if (responseCache.size >= MAX_CACHE_SIZE) {
+    const firstKey = responseCache.keys().next().value;
+    if (firstKey) responseCache.delete(firstKey);
+  }
+  responseCache.set(cacheKey, { reply, timestamp: Date.now() });
+
   return {
     statusCode: 200,
     headers,
-    body: JSON.stringify({ reply }),
+    body: JSON.stringify({ reply, cached: false }),
   };
 };

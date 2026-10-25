@@ -18,6 +18,25 @@ app.use(express.json());
 // Initialize Gemini API client (automatically picks up GEMINI_API_KEY from environment)
 const ai = new GoogleGenAI();
 
+interface CacheEntry {
+  reply: string;
+  timestamp: number;
+}
+
+const responseCache = new Map<string, CacheEntry>();
+const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours TTL
+const MAX_CACHE_SIZE = 500;
+
+function getCacheKey(msg: string, clientName?: string): string {
+  const normalized = msg
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .replace(/[?!.,;]/g, "");
+  return `${clientName || "default"}:${normalized}`;
+}
+
 // Endpoint for smart AI chatbot
 app.post("/api/chat", async (req, res) => {
   const { message, history, clientKnowledge, clientName } = req.body;
@@ -26,6 +45,17 @@ app.post("/api/chat", async (req, res) => {
     res.status(400).json({ error: "Mensagem inválida" });
     return;
   }
+
+  // 0. Cache lookup for fast repeated queries
+  const cacheKey = getCacheKey(message, clientName);
+  const cached = responseCache.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    res.setHeader("X-Cache", "HIT");
+    res.json({ reply: cached.reply, cached: true });
+    return;
+  }
+
+  res.setHeader("X-Cache", "MISS");
 
   try {
     const systemInstruction = `Você é a LIA, a assistente virtual inteligente oficial.
@@ -115,11 +145,15 @@ DIRETRIZES CRÍTICAS:
       }
     }
 
-    if (!reply) {
-      reply = "Olá! Agradecemos pelo contato. Como podemos ajudar? Se preferir falar diretamente com um atendente humano sobre pedidos ou orçamentos, clique no botão do WhatsApp abaixo!";
+    if (reply) {
+      if (responseCache.size >= MAX_CACHE_SIZE) {
+        const firstKey = responseCache.keys().next().value;
+        if (firstKey) responseCache.delete(firstKey);
+      }
+      responseCache.set(cacheKey, { reply, timestamp: Date.now() });
     }
 
-    res.json({ reply });
+    res.json({ reply, cached: false });
   } catch (error: any) {
     console.error("Gemini API Error:", error?.message || error);
     // Return graceful fallback message

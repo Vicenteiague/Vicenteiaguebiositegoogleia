@@ -1,5 +1,25 @@
 import { GoogleGenAI } from "@google/genai";
 
+interface CacheEntry {
+  reply: string;
+  timestamp: number;
+}
+
+// In-memory cache in serverless module scope (persists across warm invocations)
+const responseCache = new Map<string, CacheEntry>();
+const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours TTL
+const MAX_CACHE_SIZE = 500; // LRU cap
+
+function getCacheKey(msg: string, clientName?: string): string {
+  const normalized = msg
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .replace(/[?!.,;]/g, "");
+  return `${clientName || "default"}:${normalized}`;
+}
+
 export default async function handler(req: any, res: any) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -27,6 +47,16 @@ export default async function handler(req: any, res: any) {
     return;
   }
 
+  // 0. Cache lookup for fast sub-millisecond repeated queries
+  const cacheKey = getCacheKey(message, clientName);
+  const cached = responseCache.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    res.setHeader("X-Cache", "HIT");
+    res.status(200).json({ reply: cached.reply, cached: true });
+    return;
+  }
+
+  res.setHeader("X-Cache", "MISS");
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
   // 1. If API key is configured on Vercel, use Gemini AI
@@ -121,7 +151,12 @@ DIRETRIZES CRÍTICAS:
       }
 
       if (reply) {
-        res.status(200).json({ reply });
+        if (responseCache.size >= MAX_CACHE_SIZE) {
+          const firstKey = responseCache.keys().next().value;
+          if (firstKey) responseCache.delete(firstKey);
+        }
+        responseCache.set(cacheKey, { reply, timestamp: Date.now() });
+        res.status(200).json({ reply, cached: false });
         return;
       }
     } catch (error: any) {
@@ -155,5 +190,11 @@ DIRETRIZES CRÍTICAS:
     reply = "Para atendimento de produtos de limpeza Superlimpo: WhatsApp https://api.whatsapp.com/send?phone=5567998342469 (67) 99834-2469. Para Cartões NFC e serviços de marketing: WhatsApp (67) 99317-4612.";
   }
 
-  res.status(200).json({ reply });
+  if (responseCache.size >= MAX_CACHE_SIZE) {
+    const firstKey = responseCache.keys().next().value;
+    if (firstKey) responseCache.delete(firstKey);
+  }
+  responseCache.set(cacheKey, { reply, timestamp: Date.now() });
+
+  res.status(200).json({ reply, cached: false });
 }

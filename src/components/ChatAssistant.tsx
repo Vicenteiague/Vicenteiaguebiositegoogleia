@@ -96,6 +96,7 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const clientCache = useRef<Map<string, string>>(new Map());
 
   const sugestoes = [
     "Quais são os serviços?",
@@ -192,15 +193,32 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
 
     // Fast-path: Common greetings
     const norm = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    const normKey = norm.replace(/[?!.,;]/g, "");
+
+    // 1. Instant client-side cache check (0ms network latency for repeated questions)
+    if (clientCache.current.has(normKey)) {
+      const cachedReply = clientCache.current.get(normKey)!;
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          { id: "a-" + Date.now(), role: "assistant", text: cachedReply },
+        ]);
+        setIsTyping(false);
+      }, 180);
+      return;
+    }
+
     const greetings = ["oi", "ola", "bom dia", "boa tarde", "boa noite", "opa", "e ai", "tudo bem", "ola tudo bem"];
     if (greetings.includes(norm)) {
       setTimeout(() => {
+        const greetingReply = `Olá! Eu sou a LIA 👋 Como posso ajudar você hoje? Fique à vontade para perguntar sobre nossos cartões NFC, preços, serviços de marketing ou produtos Superlimpo!`;
+        clientCache.current.set(normKey, greetingReply);
         setMessages((prev) => [
           ...prev,
           {
             id: "a-" + Date.now(),
             role: "assistant",
-            text: `Olá! Eu sou a LIA 👋 Como posso ajudar você hoje? Fique à vontade para perguntar sobre nossos cartões NFC, preços, serviços de marketing ou produtos Superlimpo!`,
+            text: greetingReply,
           },
         ]);
         setIsTyping(false);
@@ -229,6 +247,7 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
       if (res.ok) {
         const json = await res.json();
         if (json.reply && !json.isFallback) {
+          clientCache.current.set(normKey, json.reply);
           setMessages((prev) => [
             ...prev,
             { id: "a-" + Date.now(), role: "assistant", text: json.reply },
@@ -244,6 +263,7 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
     // Fallback to local intelligent matching
     setTimeout(() => {
       const responseText = findSmartResponse(query);
+      clientCache.current.set(normKey, responseText);
       setMessages((prev) => [
         ...prev,
         { id: "a-" + Date.now(), role: "assistant", text: responseText },
