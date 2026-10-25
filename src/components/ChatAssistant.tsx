@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { MessageCircle, CornerDownLeft, RotateCcw } from "lucide-react";
+import { useState, useRef, useEffect, ReactNode } from "react";
+import { MessageCircle, CornerDownLeft, RotateCcw, ExternalLink } from "lucide-react";
 import type { BiositeData } from "../data/conectacard";
 
 interface ChatMessage {
@@ -10,6 +10,76 @@ interface ChatMessage {
 
 interface ChatAssistantProps {
   data: BiositeData;
+}
+
+/**
+ * Parses plain text containing URLs or Markdown links and renders them as clickable <a> tags.
+ */
+function renderFormattedText(text: string, isUser: boolean): ReactNode[] {
+  // Regex to match markdown links [label](url) or standalone URLs (http:// or https://)
+  const regex = /(\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))|(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/g;
+  const elements: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    const matchIndex = match.index;
+    if (matchIndex > lastIndex) {
+      elements.push(text.substring(lastIndex, matchIndex));
+    }
+
+    if (match[1]) {
+      // Markdown link: [Label](url)
+      const label = match[2];
+      const url = match[3];
+      elements.push(
+        <a
+          key={`md-${matchIndex}`}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={
+            isUser
+              ? "underline font-bold text-black hover:opacity-80 inline-flex items-center gap-0.5 break-all"
+              : "text-[#38bdf8] hover:text-[#7dd3fc] font-semibold underline underline-offset-2 inline-flex items-center gap-1 break-all transition-colors cursor-pointer"
+          }
+        >
+          <span>{label}</span>
+          <ExternalLink className="w-3 h-3 inline shrink-0 opacity-80" />
+        </a>
+      );
+    } else if (match[4]) {
+      // Standalone URL: https://...
+      const url = match[4];
+      const isWhatsApp = url.includes("whatsapp.com") || url.includes("wa.me");
+      elements.push(
+        <a
+          key={`url-${matchIndex}`}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={
+            isUser
+              ? "underline font-bold text-black hover:opacity-80 inline-flex items-center gap-0.5 break-all"
+              : isWhatsApp
+              ? "text-[#22c55e] hover:text-[#4ade80] font-semibold underline underline-offset-2 inline-flex items-center gap-1 break-all transition-colors cursor-pointer"
+              : "text-[#38bdf8] hover:text-[#7dd3fc] font-semibold underline underline-offset-2 inline-flex items-center gap-1 break-all transition-colors cursor-pointer"
+          }
+        >
+          <span>{url}</span>
+          <ExternalLink className="w-3 h-3 inline shrink-0 opacity-80" />
+        </a>
+      );
+    }
+
+    lastIndex = matchIndex + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    elements.push(text.substring(lastIndex));
+  }
+
+  return elements;
 }
 
 export function ChatAssistant({ data }: ChatAssistantProps) {
@@ -30,6 +100,7 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
   const sugestoes = [
     "Quais são os serviços?",
     "Quanto custa?",
+    "Qual o site da Superlimpo?",
     "Quero falar com alguém",
     "Como funciona o cartão NFC?",
     "Produtos Superlimpo",
@@ -62,8 +133,15 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
       return "Não temos loja física. Trabalhamos exclusivamente com entregas em toda a região de Ponta Porã e Pedro Juan Caballero!";
     }
 
+    if (q.includes("site") || q.includes("link do site") || q.includes("pagina") || q.includes("catalogo online")) {
+      if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("produto")) {
+        return "O site oficial da Superlimpo é: https://superlimpoprodutosdelimpeza.lovable.app/\n\nLá você confere nosso catálogo completo de produtos direto de fábrica e pode pedir com entrega rápida em Ponta Porã e Pedro Juan Caballero!";
+      }
+      return "Nosso site oficial da Start Mkt Local / Conectacard é: https://www.startmktlocal.com.br/\nE o site da Superlimpo é: https://superlimpoprodutosdelimpeza.lovable.app/";
+    }
+
     if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("sabao") || q.includes("desinfetante") || q.includes("cloro") || q.includes("amaciante") || q.includes("kit")) {
-      return "Somos a Superlimpo vendemos produtos de limpeza!\n\nTabela Linha dona de casa:\n• Kit com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) os 3 por R$ 38,00\n• Água sanitária 5L: R$ 12,00\n• Cloro Ativo 12% 5L: R$ 45,00\n• Desinfetante Perfumado 5L: R$ 15,00\n• Sabão de álcool (óleo novo) 5L: R$ 15,00\n• Sabão Lava Roupas Azul: R$ 35,00\n• Amaciante de roupa 5L: R$ 25,00\n• Alvejante sem cloro 5L (Tipo Vanish): R$ 30,00\n• Lava louças 5L: R$ 25,00\n• Limpa Pedras 5L: R$ 30,00\n• Limpa Porcelanato & Cerâmica 5L: R$ 30,00\n\nLinha empresas (5L por R$ 30,00 cada):\n• Limpa Chapas, Brilho Alumínio, Shampoo Automotivo, Desengraxante Automotivo e Ativado 5L.\n\nWhatsApp Superlimpo: https://api.whatsapp.com/send?phone=5567998342469";
+      return "Somos a Superlimpo vendemos produtos de limpeza!\n\nNosso Site: https://superlimpoprodutosdelimpeza.lovable.app/\nWhatsApp: https://api.whatsapp.com/send?phone=5567998342469\n\nTabela Linha dona de casa:\n• Kit com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) os 3 por R$ 38,00\n• Água sanitária 5L: R$ 12,00\n• Cloro Ativo 12% 5L: R$ 45,00\n• Desinfetante Perfumado 5L: R$ 15,00\n• Sabão de álcool (óleo novo) 5L: R$ 15,00\n• Sabão Lava Roupas Azul: R$ 35,00\n• Amaciante de roupa 5L: R$ 25,00\n• Alvejante sem cloro 5L (Tipo Vanish): R$ 30,00\n• Lava louças 5L: R$ 25,00\n• Limpa Pedras 5L: R$ 30,00\n• Limpa Porcelanato & Cerâmica 5L: R$ 30,00\n\nLinha empresas (5L por R$ 30,00 cada):\n• Limpa Chapas, Brilho Alumínio, Shampoo Automotivo, Desengraxante Automotivo e Ativado 5L.";
     }
 
     if (q.includes("servico") || q.includes("quais sao os servicos") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
@@ -279,11 +357,11 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
             )}
             {msg.role === "user" ? (
               <div className="cliente-chat-question bg-[#bef226] text-[#121212] font-semibold text-xs sm:text-sm py-2 px-3.5 rounded-2xl rounded-tr-xs max-w-[85%] shadow-xs">
-                <p className="whitespace-pre-wrap">{msg.text}</p>
+                <div className="whitespace-pre-wrap">{renderFormattedText(msg.text, true)}</div>
               </div>
             ) : (
               <div className="bg-[#242424] border border-[#383838] p-3 rounded-2xl rounded-tl-xs text-[#f5f5f5] text-xs sm:text-sm leading-relaxed max-w-[85%] shadow-xs">
-                <p className="whitespace-pre-wrap">{msg.text}</p>
+                <div className="whitespace-pre-wrap">{renderFormattedText(msg.text, false)}</div>
               </div>
             )}
           </div>
