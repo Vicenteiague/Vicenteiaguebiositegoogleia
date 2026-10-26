@@ -151,8 +151,8 @@ export default function App() {
       <VideoModal
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}
-        title={data.video.title}
-        videoUrl={data.video.url}
+        title={data.video?.title || ""}
+        videoUrl={data.video?.url || ""}
       />
 
       <InfoModal

@@ -114,26 +114,70 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
     }
   }, [messages, isTyping]);
 
+  const TABELA_COMPLETA_SUPERLIMPO = `Somos a Superlimpo vendemos produtos de limpeza!
+
+📍 Não temos loja física. Apenas entrega em toda região de Ponta Porã e Pedro Juan Caballero.
+⏰ Horários de entrega: até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas.
+📄 Não temos Nota Fiscal, apenas Recibo.
+🚚 A maioria das entregas não tem custo (pequena taxa dependendo da distância e pedido).
+
+📋 TABELA DE PRODUTOS SUPERLIMPO:
+
+Linha Dona de Casa:
+• Kit de Produto com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) todos os 3 por R$ 38,00
+• Água sanitária 5 litros: R$ 12,00
+• Cloro Ativo 12% 5 litros: R$ 45,00
+• Desinfetante Perfumado 5 litros: R$ 15,00
+• Sabão de álcool (Feito com óleo novo) 5 litros: R$ 15,00
+• Sabão Lava Roupas Azul: R$ 35,00
+• Amaciante de roupa 5 litros: R$ 25,00
+• Alvejante sem cloro 5 litros (Tipo Vanish): R$ 30,00
+• Lava louças 5 litros: R$ 25,00
+• Limpa Pedras 5 litros: R$ 30,00
+• Limpa Porcelanato & Cerâmica 5 litros: R$ 30,00
+
+Linha Empresas:
+• Limpa Chapas 5 litros: R$ 30,00
+• Brilho alumínio 5 litros: R$ 30,00
+• Shampoo Automotivo 5 litros: R$ 30,00
+• Desengraxante Automotivo 5 litros: R$ 30,00
+• Ativado 5L: R$ 30,00
+
+📲 Peça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469
+🌐 Nosso Site: https://superlimpoprodutosdelimpeza.lovable.app/`;
+
+  const TABELA_PRECOS_BIOSITEAI = `Nossos Preços:
+
+1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00
+
+2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.
+
+Peça o seu pelo WhatsApp: https://wa.me/5567993174612`;
+
   const findSmartResponse = (query: string): string => {
     const q = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    // Superlimpo specific rules
-    if (q.includes("horario") || q.includes("que horas") || q.includes("sabado") || (q.includes("entrega") && (q.includes("hora") || q.includes("quando")))) {
+    // 1. Superlimpo: Horários de entrega
+    if (q.includes("horario") || q.includes("que horas") || q.includes("sabado") || (q.includes("entrega") && (q.includes("hora") || q.includes("quando") || q.includes("tempo")))) {
       return "As entregas da Superlimpo são feitas até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas em toda Ponta Porã e Pedro Juan Caballero.";
     }
 
+    // 2. Superlimpo: Nota Fiscal / Recibo
     if (q.includes("nota") || q.includes("fiscal") || q.includes("recibo") || q.includes("comprovante")) {
       return "Não temos Nota Fiscal, apenas Recibo.";
     }
 
+    // 3. Superlimpo: Taxa de entrega / Frete
     if (q.includes("taxa") || q.includes("frete") || (q.includes("quanto") && q.includes("entrega"))) {
       return "Dependendo da distância e do pedido existe uma pequena taxa de entrega. Mas a maioria das entregas não tem custo!";
     }
 
-    if (q.includes("loja") || q.includes("fisica") || q.includes("onde fica a loja")) {
+    // 4. Superlimpo: Loja física
+    if (q.includes("loja") || q.includes("fisica") || q.includes("onde fica a loja") || q.includes("tem loja")) {
       return "Não temos loja física. Trabalhamos exclusivamente com entregas em toda a região de Ponta Porã e Pedro Juan Caballero!";
     }
 
+    // 5. Sites oficiais
     if (q.includes("site") || q.includes("link do site") || q.includes("pagina") || q.includes("catalogo online")) {
       if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("produto")) {
         return "O site oficial da Superlimpo é: https://superlimpoprodutosdelimpeza.lovable.app/\n\nLá você confere nosso catálogo completo de produtos direto de fábrica e pode pedir com entrega rápida em Ponta Porã e Pedro Juan Caballero!";
@@ -141,15 +185,51 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
       return "Nosso site oficial da Start Mkt Local / Conectacard é: https://www.startmktlocal.com.br/\nE o site da Superlimpo é: https://superlimpoprodutosdelimpeza.lovable.app/";
     }
 
-    if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("sabao") || q.includes("desinfetante") || q.includes("cloro") || q.includes("amaciante") || q.includes("kit")) {
-      return "Somos a Superlimpo vendemos produtos de limpeza!\n\nNosso Site: https://superlimpoprodutosdelimpeza.lovable.app/\nWhatsApp: https://api.whatsapp.com/send?phone=5567998342469\n\nTabela Linha dona de casa:\n• Kit com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) os 3 por R$ 38,00\n• Água sanitária 5L: R$ 12,00\n• Cloro Ativo 12% 5L: R$ 45,00\n• Desinfetante Perfumado 5L: R$ 15,00\n• Sabão de álcool (óleo novo) 5L: R$ 15,00\n• Sabão Lava Roupas Azul: R$ 35,00\n• Amaciante de roupa 5L: R$ 25,00\n• Alvejante sem cloro 5L (Tipo Vanish): R$ 30,00\n• Lava louças 5L: R$ 25,00\n• Limpa Pedras 5L: R$ 30,00\n• Limpa Porcelanato & Cerâmica 5L: R$ 30,00\n\nLinha empresas (5L por R$ 30,00 cada):\n• Limpa Chapas, Brilho Alumínio, Shampoo Automotivo, Desengraxante Automotivo e Ativado 5L.";
+    // 6. Superlimpo: Tabela completa de produtos e preços (quando pergunta por produtos de limpeza, superlimpo, tabela, kit, sabao, etc.)
+    const isSuperlimpoQuery =
+      q.includes("superlimpo") ||
+      q.includes("limpeza") ||
+      q.includes("sabao") ||
+      q.includes("desinfetante") ||
+      q.includes("cloro") ||
+      q.includes("amaciante") ||
+      q.includes("alvejante") ||
+      q.includes("detergente") ||
+      q.includes("lava loucas") ||
+      q.includes("limpa pedras") ||
+      q.includes("porcelanato") ||
+      q.includes("limpa chapas") ||
+      q.includes("brilho aluminio") ||
+      q.includes("shampoo automotivo") ||
+      q.includes("desengraxante") ||
+      q.includes("ativado") ||
+      (q.includes("kit") && !q.includes("nfc"));
+
+    if (isSuperlimpoQuery) {
+      // Itens específicos rápidos
+      if (q.includes("kit") && (q.includes("quanto") || q.includes("preco") || q.includes("valor") || q.includes("como e"))) {
+        return "Nosso Kit Econômico Dona de Casa vem com 3 galões de 5 litros (Água Sanitária 5L, Desinfetante 5L e Sabão de Álcool 5L) todos os 3 por apenas R$ 38,00!\n\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
+      }
+      if (q.includes("cloro") && (q.includes("quanto") || q.includes("preco") || q.includes("valor"))) {
+        return "Cloro Ativo 12% 5 litros: R$ 45,00 (e Água Sanitária 5 litros: R$ 12,00).\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
+      }
+      if (q.includes("amaciante") && (q.includes("quanto") || q.includes("preco") || q.includes("valor"))) {
+        return "Amaciante de roupa 5 litros: R$ 25,00.\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
+      }
+      if (q.includes("sabao lava roupas") || q.includes("sabao azul") || (q.includes("azul") && q.includes("sabao"))) {
+        return "Sabão Lava Roupas Azul: R$ 35,00 (5 litros).\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
+      }
+      if (q.includes("sabao de alcool") || q.includes("oleo novo")) {
+        return "Sabão de álcool (Feito com óleo novo) 5 litros: R$ 15,00.\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
+      }
+      if (q.includes("desinfetante") && (q.includes("quanto") || q.includes("preco") || q.includes("valor"))) {
+        return "Desinfetante Perfumado 5 litros: R$ 15,00.\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
+      }
+      // Sempre retorna a TABELA COMPLETA para qualquer pergunta geral de produtos, preços ou catálogo da Superlimpo!
+      return TABELA_COMPLETA_SUPERLIMPO;
     }
 
-    if (q.includes("servico") || q.includes("quais sao os servicos") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
-      return "A Start Mkt Local e a Conectacard oferecem:\n\n• Cartões NFC Infinitos e Plaquinhas QR Code personalizadas\n• Criação de Sites profissionais e Landing Pages\n• Otimização de Perfil de Empresas no Google (Google Meu Negócio)\n• AvaliaCard: Placa NFC para avaliações 5 estrelas no Google\n• Gestão de Tráfego Pago (anúncios no Google e Meta)\n• Linha Superlimpo de produtos de limpeza direto de fábrica em Ponta Porã!";
-    }
-
-    // REFORÇO DOS PREÇOS OFICIAIS DO BIOSITEAI
+    // 7. Conectacard / BiositeAi: Preços, Valores, Planos, Orçamento
     if (
       q.includes("quanto custa") ||
       q.includes("preco") ||
@@ -159,40 +239,48 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
       q.includes("plano") ||
       q.includes("custo") ||
       q.includes("promocao") ||
-      q.includes("quanto e")
+      q.includes("quanto e") ||
+      q.includes("tabela de preco")
     ) {
-      if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("sabao") || q.includes("desinfetante")) {
-        return "Tabela de Preços Superlimpo:\n\n• Kit Dona de Casa (3 galões de 5L): R$ 38,00\n• Água sanitária 5L: R$ 12,00 | Cloro 12% 5L: R$ 45,00\n• Desinfetante 5L: R$ 15,00 | Sabão de álcool 5L: R$ 15,00\n• Sabão Lava Roupas 5L: R$ 35,00 | Amaciante 5L: R$ 25,00\n• Linha Empresas (5L): R$ 30,00 cada galão.\n\nPedir pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
-      }
-
-      return "Nossos Preços:\n\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
+      return TABELA_PRECOS_BIOSITEAI;
     }
 
-    if (q.includes("biosite") || q.includes("biositeai") || q.includes("mini site") || q.includes("linktree")) {
-      return "O BiositeAi é um mini site inteligente completo com atendente virtual LIA com inteligência artificial, cartões NFC e plaquinhas com QR Code!\n\nNossos Preços:\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
+    // 8. O que é o BiositeAi / Conectacard
+    if (q.includes("biosite") || q.includes("biositeai") || q.includes("mini site") || q.includes("linktree") || q.includes("o que e biosite")) {
+      return `O BiositeAi é um mini site inteligente completo com biosite interativo, atendente virtual LIA com inteligência artificial, cartões NFC e plaquinhas com QR Code!\n\n${TABELA_PRECOS_BIOSITEAI}`;
     }
 
-    if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("funciona o cartao")) {
+    // 9. Serviços oferecidos
+    if (q.includes("servico") || q.includes("quais sao os servicos") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
+      return "A Start Mkt Local e a Conectacard oferecem:\n\n• Cartões NFC Infinitos e Plaquinhas QR Code personalizadas\n• Criação de Sites profissionais e Landing Pages\n• Otimização de Perfil de Empresas no Google (Google Meu Negócio)\n• AvaliaCard: Placa NFC para avaliações 5 estrelas no Google (https://avaliacard.vercel.app/)\n• Gestão de Tráfego Pago (anúncios no Google e Meta)\n• SEO para ranqueamento no Google em Ponta Porã e região\n• Linha Superlimpo de produtos de limpeza direto de fábrica!\n\nFale conosco no WhatsApp: https://wa.me/5567993174612";
+    }
+
+    // 10. Como funciona o Cartão NFC
+    if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("funciona o cartao") || q.includes("como usa")) {
       return "O Cartão NFC Conectacard possui tecnologia por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!";
     }
 
+    // 11. Contatos / WhatsApp
     if (q.includes("falar com alguem") || q.includes("humano") || q.includes("atendente") || q.includes("whatsapp") || q.includes("contato") || q.includes("telefone")) {
-      return "Com certeza! Para falar sobre produtos de limpeza Superlimpo: https://api.whatsapp.com/send?phone=5567998342469 (67) 99834-2469. Para Cartões NFC e serviços: WhatsApp (67) 99317-4612!";
+      return "Com certeza! Nossos canais de atendimento:\n\n💳 Para Cartões NFC, Biosite e Serviços Start Mkt: WhatsApp (67) 99317-4612 | https://wa.me/5567993174612\n\n🧼 Para Produtos de Limpeza Superlimpo: WhatsApp (67) 99834-2469 | https://api.whatsapp.com/send?phone=5567998342469";
     }
 
-    if (q.includes("entrega") || q.includes("frete") || q.includes("onde entrega") || q.includes("fronteira") || q.includes("correios")) {
-      return "Produtos de limpeza Superlimpo: entregas até às 16h (sábados às 7h e 15:30h) em Ponta Porã e Pedro Juan Caballero. Cartões NFC: envio para todo o Brasil via Correios!";
+    // 12. Entregas e frete gerais
+    if (q.includes("entrega") || q.includes("frete") || q.includes("onde entrega") || q.includes("fronteira") || q.includes("correios") || q.includes("envio")) {
+      return "• Produtos de limpeza Superlimpo: entregas até às 16h (sábados às 7h e 15:30h) em Ponta Porã e Pedro Juan Caballero.\n• Cartões NFC e Plaquinhas: envio para todo o Brasil via Correios com código de rastreamento!";
     }
 
-    if (q.includes("onde") || q.includes("endereco") || q.includes("localizacao") || q.includes("cidade") || q.includes("fica")) {
-      return "Estamos localizados em Ponta Porã, MS (Start Mkt Local). Atendemos presencialmente toda a região de fronteira e o Brasil inteiro de forma digital!";
+    // 13. Endereço e localização
+    if (q.includes("onde") || q.includes("endereco") || q.includes("localizacao") || q.includes("cidade") || q.includes("fica") || q.includes("mapa")) {
+      return "Estamos localizados em Ponta Porã, MS (Start Mkt Local - Rua Luiz Pinto Magalhães, 154 - Santa Isabel). Atendemos presencialmente toda a região de fronteira e o Brasil inteiro de forma digital!\n\nVeja no Google Maps: https://www.google.com/maps/search/?api=1&query=Start+Mkt+Local+-+Rua+Luiz+Pinto+Magalh%C3%A3es,+154+-+Santa+Isabel,+Ponta+Por%C3%A3+-+MS";
     }
 
-    if (q.includes("personaliz") || q.includes("logo") || q.includes("arte") || q.includes("minha marca")) {
-      return "Sim! Nossos cartões e plaquinhas são 100% personalizados com o logotipo, cores e identidade visual da sua marca com acabamento premium.";
+    // 14. Personalização de cartões
+    if (q.includes("personaliz") || q.includes("logo") || q.includes("arte") || q.includes("minha marca") || q.includes("impressao")) {
+      return "Sim! Nossos cartões e plaquinhas são 100% personalizados com o logotipo, cores e identidade visual da sua marca com acabamento premium de alta durabilidade. Fale conosco: https://wa.me/5567993174612";
     }
 
-    // Regra obrigatória: não inventar, não alucinar. Se não souber, passar para humano com link
+    // 15. Regra obrigatória: Se não souber com certeza, passar para o atendimento humano com o link
     return "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469";
   };
 
@@ -210,7 +298,6 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
     if (!textToSend) setInputVal("");
     setIsTyping(true);
 
-    // Fast-path: Common greetings
     const norm = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
     const normKey = norm.replace(/[?!.,;]/g, "");
 
@@ -227,10 +314,11 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
       return;
     }
 
+    // 2. Fast-path: Greetings
     const greetings = ["oi", "ola", "bom dia", "boa tarde", "boa noite", "opa", "e ai", "tudo bem", "ola tudo bem"];
     if (greetings.includes(norm)) {
       setTimeout(() => {
-        const greetingReply = `Olá! Eu sou a LIA 👋 Como posso ajudar você hoje? Fique à vontade para perguntar sobre nossos cartões NFC, preços, serviços de marketing ou produtos Superlimpo!`;
+        const greetingReply = `Olá! Eu sou a LIA 👋 Como posso ajudar você hoje? Fique à vontade para perguntar sobre nossos preços do BiositeAi, cartões NFC, serviços de marketing ou a tabela de produtos da Superlimpo!`;
         clientCache.current.set(normKey, greetingReply);
         setMessages((prev) => [
           ...prev,
@@ -241,15 +329,36 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
           },
         ]);
         setIsTyping(false);
-      }, 250);
+      }, 200);
       return;
     }
 
-    // Try calling server AI endpoint
+    // 3. Fast-path: Direct smart match from database (Instant and 100% accurate, no waiting, no timeouts)
+    const directSmartResponse = findSmartResponse(query);
+    const isHumanFallback = directSmartResponse.startsWith("Vou passar para o atendimento humano");
+
+    // If we have a verified database match (not fallback), answer immediately without making the user wait!
+    if (!isHumanFallback) {
+      setTimeout(() => {
+        clientCache.current.set(normKey, directSmartResponse);
+        setMessages((prev) => [
+          ...prev,
+          { id: "a-" + Date.now(), role: "assistant", text: directSmartResponse },
+        ]);
+        setIsTyping(false);
+      }, 260);
+      return;
+    }
+
+    // 4. Try calling server AI endpoint with strict 3-second timeout for open-ended queries
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           message: query,
           clientName: data.name,
@@ -262,6 +371,8 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
           history: messages,
         }),
       });
+
+      clearTimeout(timeoutId);
 
       if (res.ok) {
         const json = await res.json();
@@ -276,19 +387,19 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
         }
       }
     } catch {
-      // Offline fallback
+      // Abort or network failure -> seamlessly falls through to local matching
     }
 
-    // Fallback to local intelligent matching
+    // 5. Final fallback to local intelligent matching
     setTimeout(() => {
-      const responseText = findSmartResponse(query);
+      const responseText = directSmartResponse;
       clientCache.current.set(normKey, responseText);
       setMessages((prev) => [
         ...prev,
         { id: "a-" + Date.now(), role: "assistant", text: responseText },
       ]);
       setIsTyping(false);
-    }, 350);
+    }, 250);
   };
 
   const handleClear = () => {

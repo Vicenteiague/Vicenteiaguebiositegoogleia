@@ -132,7 +132,7 @@ DIRETRIZES CRÍTICAS:
         parts: [{ text: message }],
       });
 
-      const candidateModels = ["gemini-3.1-flash-lite", "gemini-flash-latest", "gemini-3.8-flash"];
+      const candidateModels = ["gemini-2.5-flash", "gemini-2.5-flash-lite"];
       let reply = "";
 
       for (const model of candidateModels) {
@@ -143,7 +143,7 @@ DIRETRIZES CRÍTICAS:
             config: {
               systemInstruction,
               temperature: 0.3,
-              maxOutputTokens: 200,
+              maxOutputTokens: 1024,
             },
           });
           if (response.text) {
@@ -169,9 +169,40 @@ DIRETRIZES CRÍTICAS:
     }
   }
 
-  // 2. Intelligent fallback if API key is not yet added in Vercel settings
   // 2. Intelligent fallback matching if API key is not yet added
   const q = message.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  const TABELA_COMPLETA_SUPERLIMPO = `Somos a Superlimpo vendemos produtos de limpeza!
+
+📍 Não temos loja física. Apenas entrega em toda região de Ponta Porã e Pedro Juan Caballero.
+⏰ Horários de entrega: até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas.
+📄 Não temos Nota Fiscal, apenas Recibo.
+🚚 A maioria das entregas não tem custo (pequena taxa dependendo da distância e pedido).
+
+📋 TABELA DE PRODUTOS SUPERLIMPO:
+
+Linha Dona de Casa:
+• Kit de Produto com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) todos os 3 por R$ 38,00
+• Água sanitária 5 litros: R$ 12,00
+• Cloro Ativo 12% 5 litros: R$ 45,00
+• Desinfetante Perfumado 5 litros: R$ 15,00
+• Sabão de álcool (Feito com óleo novo) 5 litros: R$ 15,00
+• Sabão Lava Roupas Azul: R$ 35,00
+• Amaciante de roupa 5 litros: R$ 25,00
+• Alvejante sem cloro 5 litros (Tipo Vanish): R$ 30,00
+• Lava louças 5 litros: R$ 25,00
+• Limpa Pedras 5 litros: R$ 30,00
+• Limpa Porcelanato & Cerâmica 5 litros: R$ 30,00
+
+Linha Empresas:
+• Limpa Chapas 5 litros: R$ 30,00
+• Brilho alumínio 5 litros: R$ 30,00
+• Shampoo Automotivo 5 litros: R$ 30,00
+• Desengraxante Automotivo 5 litros: R$ 30,00
+• Ativado 5L: R$ 30,00
+
+📲 Peça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469
+🌐 Nosso Site: https://superlimpoprodutosdelimpeza.lovable.app/`;
 
   let reply = 'Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469';
 
@@ -183,12 +214,28 @@ DIRETRIZES CRÍTICAS:
     reply = "Dependendo da distância e do pedido existe uma pequena taxa de entrega. Mas a maioria das entregas não tem custo!";
   } else if (q.includes("loja") || q.includes("fisica") || q.includes("onde comprar")) {
     reply = "Não temos loja física. Trabalhamos apenas com entregas em toda região de Ponta Porã e Pedro Juan Caballero.";
-  } else if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("sabao") || q.includes("desinfetante") || q.includes("cloro") || q.includes("amaciante")) {
-    reply = "Tabela Superlimpo — Linha dona de casa: Kit com 3 galões 5L (Água sanitária + Desinfetante + Sabão de álcool) por R$ 38,00! Avulsos 5L: Água sanitária R$ 12, Cloro 12% R$ 45, Desinfetante R$ 15, Sabão de álcool R$ 15, Sabão Lava Roupas R$ 35, Amaciante R$ 25, Alvejante sem cloro R$ 30, Lava louças R$ 25, Limpa Pedras R$ 30, Limpa Porcelanato R$ 30. Linha empresas (5L por R$ 30): Limpa Chapas, Brilho Alumínio, Shampoo Automotivo, Desengraxante e Ativado. WhatsApp Superlimpo: https://api.whatsapp.com/send?phone=5567998342469";
+  } else if (
+    q.includes("superlimpo") ||
+    q.includes("limpeza") ||
+    q.includes("sabao") ||
+    q.includes("desinfetante") ||
+    q.includes("cloro") ||
+    q.includes("amaciante") ||
+    q.includes("alvejante") ||
+    q.includes("detergente") ||
+    q.includes("lava loucas") ||
+    q.includes("limpa pedras") ||
+    q.includes("limpa chapas") ||
+    q.includes("shampoo automotivo") ||
+    q.includes("desengraxante") ||
+    q.includes("ativado") ||
+    q.includes("kit")
+  ) {
+    reply = TABELA_COMPLETA_SUPERLIMPO;
   } else if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("cartao nfc") || q.includes("funciona o cartao")) {
     reply = "O Cartão NFC Conectacard possui chip por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!";
   } else if (q.includes("servico") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
-    reply = "A Start Mkt Local e Conectacard oferecem: Criação de Sites profissionais, Cartão NFC Infinito personalizado, Plaquinhas QR Code/NFC, AvaliaCard (avaliações 5 estrelas no Google), Gestão de Perfil Google, SEO e Tráfego Pago. Além disso, temos a distribuidora Superlimpo de produtos de limpeza direto de fábrica!";
+    reply = "A Start Mkt Local e Conectacard oferecem: Criação de Sites profissionais, Cartão NFC Infinito personalizado, Plaquinhas QR Code/NFC, AvaliaCard (avaliações 5 estrelas no Google: https://avaliacard.vercel.app/), Gestão de Perfil Google, SEO e Tráfego Pago. Além disso, temos a distribuidora Superlimpo de produtos de limpeza direto de fábrica!\nWhatsApp Conectacard: (67) 99317-4612.";
   } else if (q.includes("quanto custa") || q.includes("preco") || q.includes("valor") || q.includes("tabela") || q.includes("orcamento") || q.includes("plano") || q.includes("promocao") || q.includes("quanto e")) {
     reply = "Nossos Preços:\n\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
   } else if (q.includes("biosite") || q.includes("biositeai") || q.includes("mini site")) {

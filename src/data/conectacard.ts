@@ -31,7 +31,7 @@ export interface BiositeData {
     src: string;
     alt: string;
   };
-  video: {
+  video?: {
     title: string;
     poster: string;
     url: string;
@@ -47,7 +47,7 @@ export interface BiositeData {
   };
   linksTitulo: string;
   links: BiositeLink[];
-  servicos: {
+  servicos?: {
     title: string;
     text: string;
     items: BiositeLink[];
@@ -69,7 +69,7 @@ export interface BiositeData {
     empresa: FaqItem[];
     produtos: FaqItem[];
   };
-  seo: {
+  seo?: {
     title: string;
     description: string;
   };
@@ -309,7 +309,7 @@ SE NÃO SOUBER com certeza a resposta, diga exatamente: "Vou passar para o atend
       {
         id: "orcamento",
         pergunta: "Quanto custam os produtos Superlimpo?",
-        resposta: "Linha dona de casa: Kit com 3 galões 5L (Água Sanitária + Desinfetante + Sabão de Álcool) por R$ 38,00! Avulsos 5L: Água Sanitária R$ 12,00; Cloro 12% R$ 45,00; Desinfetante Perfumado R$ 15,00; Sabão de Álcool (óleo novo) R$ 15,00; Sabão Lava Roupas Azul R$ 35,00; Amaciante R$ 25,00; Alvejante sem cloro R$ 30,00; Lava louças R$ 25,00; Limpa Pedras R$ 30,00; Limpa Porcelanato R$ 30,00. Linha empresas: Limpa Chapas, Brilho alumínio, Shampoo Automotivo, Desengraxante e Ativado por R$ 30,00 cada 5L."
+        resposta: "Tabela de Produtos Superlimpo:\n\nLinha Dona de Casa:\n• Kit de Produto com (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) todos os 3 por R$ 38,00\n• Água sanitária 5 litros: R$ 12,00\n• Cloro Ativo 12% 5 litros: R$ 45,00\n• Desinfetante Perfumado 5 litros: R$ 15,00\n• Sabão de álcool (Feito com óleo novo) 5 litros: R$ 15,00\n• Sabão Lava Roupas Azul: R$ 35,00\n• Amaciante de roupa 5 litros: R$ 25,00\n• Alvejante sem cloro 5 litros (Tipo Vanish): R$ 30,00\n• Lava louças 5 litros: R$ 25,00\n• Limpa Pedras 5 litros: R$ 30,00\n• Limpa Porcelanato & Cerâmica 5 litros: R$ 30,00\n\nLinha Empresas:\n• Limpa Chapas 5 litros: R$ 30,00\n• Brilho alumínio 5 litros: R$ 30,00\n• Shampoo Automotivo 5 litros: R$ 30,00\n• Desengraxante Automotivo 5 litros: R$ 30,00\n• Ativado 5L: R$ 30,00\n\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469\nSite: https://superlimpoprodutosdelimpeza.lovable.app/"
       },
       {
         id: "horario-entrega",

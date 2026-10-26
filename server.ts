@@ -128,7 +128,7 @@ DIRETRIZES CRÍTICAS:
       parts: [{ text: message }],
     });
 
-    const candidateModels = ["gemini-3.8-flash", "gemini-flash-latest", "gemini-3.1-flash-lite"];
+    const candidateModels = ["gemini-2.5-flash", "gemini-2.5-flash-lite"];
     let reply = "";
 
     for (const model of candidateModels) {
@@ -138,7 +138,8 @@ DIRETRIZES CRÍTICAS:
           contents,
           config: {
             systemInstruction,
-            temperature: 0.7,
+            temperature: 0.3,
+            maxOutputTokens: 1024,
           },
         });
         if (response.text) {
@@ -147,6 +148,26 @@ DIRETRIZES CRÍTICAS:
         }
       } catch (err: any) {
         console.warn(`Model ${model} attempt failed:`, err?.message || err);
+      }
+    }
+
+    if (!reply) {
+      // Intelligent fast fallback
+      const q = message.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      if (
+        q.includes("superlimpo") ||
+        q.includes("limpeza") ||
+        q.includes("sabao") ||
+        q.includes("desinfetante") ||
+        q.includes("cloro") ||
+        q.includes("amaciante") ||
+        q.includes("kit")
+      ) {
+        reply = `Somos a Superlimpo vendemos produtos de limpeza!\n\nTabela Linha Dona de Casa:\n• Kit de Produto (Água sanitária 5L, Desinfetante 5L e Sabão de álcool 5L) os 3 por R$ 38,00\n• Água sanitária 5L: R$ 12,00\n• Cloro Ativo 12% 5L: R$ 45,00\n• Desinfetante Perfumado 5L: R$ 15,00\n• Sabão de álcool (óleo novo) 5L: R$ 15,00\n• Sabão Lava Roupas Azul: R$ 35,00\n• Amaciante de roupa 5L: R$ 25,00\n• Alvejante sem cloro 5L: R$ 30,00\n• Lava louças 5L: R$ 25,00\n• Limpa Pedras 5L: R$ 30,00\n• Limpa Porcelanato & Cerâmica 5L: R$ 30,00\n\nLinha Empresas:\n• Limpa Chapas 5L: R$ 30,00\n• Brilho alumínio 5L: R$ 30,00\n• Shampoo Automotivo 5L: R$ 30,00\n• Desengraxante Automotivo 5L: R$ 30,00\n• Ativado 5L: R$ 30,00\n\nPeça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469\nSite: https://superlimpoprodutosdelimpeza.lovable.app/`;
+      } else if (q.includes("quanto custa") || q.includes("preco") || q.includes("valor") || q.includes("plano") || q.includes("biosite")) {
+        reply = `Nossos Preços:\n\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612`;
+      } else {
+        reply = "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469";
       }
     }
 
@@ -161,9 +182,8 @@ DIRETRIZES CRÍTICAS:
     res.json({ reply, cached: false });
   } catch (error: any) {
     console.error("Gemini API Error:", error?.message || error);
-    // Return graceful fallback message
     res.json({
-      reply: "No momento nosso sistema de IA está passando por instabilidade momentânea. Por favor, clique no botão abaixo para falar diretamente no WhatsApp!",
+      reply: "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469",
       isFallback: true,
     });
   }
