@@ -214,8 +214,8 @@ export const conectacardData: BiositeData = {
   },
   mapa: {
     title: "Start Mkt Local no Google Maps",
-    link: "https://maps.google.com/?cid=9571320679847459349",
-    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.426280186347!2d-55.7132969254635!3d-22.52569892436112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94626fc36a5e31cf%3A0x84d4297281a87a15!2sStart%20Mkt%20Local%20-%20Ag%C3%AAncia%20de%20marketing!5e0!3m2!1spt-BR!2sbr!4v1762298523594!5m2!1spt-BR!2sbr"
+    link: "https://www.google.com/maps/search/?api=1&query=Start+Mkt+Local+-+Rua+Luiz+Pinto+Magalh%C3%A3es,+154+-+Santa+Isabel,+Ponta+Por%C3%A3+-+MS",
+    embed: "https://www.openstreetmap.org/export/embed.html?bbox=-55.7332969%2C-22.5356989%2C-55.6932969%2C-22.5156989&layer=mapnik&marker=-22.5256989%2C-55.7132969"
   },
   contato: {
     local: "Start Mkt Local Ponta Porã MS",
@@ -225,9 +225,14 @@ export const conectacardData: BiositeData = {
   footer: "Conectacard Cartão NFC",
   atendimento: {
     saudacao: "Olá! Qual é a sua dúvida?",
-    conhecimento: `BANCO DE DADOS 1 - CONECTACARD & START MKT LOCAL:
+    conhecimento: `BANCO DE DADOS 1 - CONECTACARD, BIOSITEAI & START MKT LOCAL:
+O BiositeAi é um mini site inteligente com biosite interativo, atendente virtual LIA com IA, cartões NFC e plaquinhas com QR Code.
 Fazemos criação de Sites profissionais, plaquinhas NFC e QR Code, placas de avaliação do Google (AvaliaCard), biosite com atendente virtual e inteligência artificial. Tenha todos os seus links e redes sociais em um só lugar. Não são aqueles chats de aperte 1 ou 2, são respostas reais. Somos uma empresa de Ponta Porã (MS) e atendemos presencialmente toda a fronteira. E atendimento a todo Brasil via Correios com código de rastreamento.
 Contato Conectacard: WhatsApp (67) 99317-4612, E-mail: startmktlocal@gmail.com, Site: https://www.startmktlocal.com.br/
+
+NOSSOS PREÇOS BIOSITEAI:
+1. Biosites sem Chatbot somente o link: Preço promocional R$ 99,00
+2. Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.
 
 BANCO DE DADOS 2 - SUPERLIMPO PRODUTOS DE LIMPEZA:
 Somos a Superlimpo vendemos produtos de limpeza.
@@ -278,6 +283,11 @@ SE NÃO SOUBER com certeza a resposta, diga exatamente: "Vou passar para o atend
         id: "contato",
         pergunta: "Como entro em contato?",
         resposta: "WhatsApp: (67) 99317-4612. E-mail: startmktlocal@gmail.com. Atendemos de segunda a sábado com suporte ágil para tirar todas as dúvidas."
+      },
+      {
+        id: "precos-biosite",
+        pergunta: "Quanto custa o Biosite?",
+        resposta: "Nossos Preços:\n1. Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n2. Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês."
       }
     ],
     produtos: [

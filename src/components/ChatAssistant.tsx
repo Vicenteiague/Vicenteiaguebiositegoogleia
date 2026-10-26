@@ -149,8 +149,27 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
       return "A Start Mkt Local e a Conectacard oferecem:\n\n• Cartões NFC Infinitos e Plaquinhas QR Code personalizadas\n• Criação de Sites profissionais e Landing Pages\n• Otimização de Perfil de Empresas no Google (Google Meu Negócio)\n• AvaliaCard: Placa NFC para avaliações 5 estrelas no Google\n• Gestão de Tráfego Pago (anúncios no Google e Meta)\n• Linha Superlimpo de produtos de limpeza direto de fábrica em Ponta Porã!";
     }
 
-    if (q.includes("preco do cartao") || q.includes("valor do cartao") || q.includes("quanto custa o cartao")) {
-      return "O Cartão NFC Conectacard individual sai a partir de R$ 149 (pagamento único, sem mensalidade obrigatória). Para modelos personalizados com sua logo, fale conosco no WhatsApp!";
+    // REFORÇO DOS PREÇOS OFICIAIS DO BIOSITEAI
+    if (
+      q.includes("quanto custa") ||
+      q.includes("preco") ||
+      q.includes("valor") ||
+      q.includes("tabela") ||
+      q.includes("orcamento") ||
+      q.includes("plano") ||
+      q.includes("custo") ||
+      q.includes("promocao") ||
+      q.includes("quanto e")
+    ) {
+      if (q.includes("superlimpo") || q.includes("limpeza") || q.includes("sabao") || q.includes("desinfetante")) {
+        return "Tabela de Preços Superlimpo:\n\n• Kit Dona de Casa (3 galões de 5L): R$ 38,00\n• Água sanitária 5L: R$ 12,00 | Cloro 12% 5L: R$ 45,00\n• Desinfetante 5L: R$ 15,00 | Sabão de álcool 5L: R$ 15,00\n• Sabão Lava Roupas 5L: R$ 35,00 | Amaciante 5L: R$ 25,00\n• Linha Empresas (5L): R$ 30,00 cada galão.\n\nPedir pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469";
+      }
+
+      return "Nossos Preços:\n\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
+    }
+
+    if (q.includes("biosite") || q.includes("biositeai") || q.includes("mini site") || q.includes("linktree")) {
+      return "O BiositeAi é um mini site inteligente completo com atendente virtual LIA com inteligência artificial, cartões NFC e plaquinhas com QR Code!\n\nNossos Preços:\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
     }
 
     if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("funciona o cartao")) {

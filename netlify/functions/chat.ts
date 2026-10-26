@@ -80,11 +80,16 @@ export const handler = async (event: any) => {
 Seu objetivo é tirar dúvidas, apresentar os serviços e produtos e ajudar os clientes a encontrar a melhor solução com simpatia, rapidez e clareza em português do Brasil.
 Apresente-se com alegria como LIA 👋.
 
-BANCO DE DADOS 1 - CONECTACARD CARTÃO NFC & START MKT LOCAL:
-O Conectacard é um cartão inteligente com tecnologia NFC e biosite interativo.
+BANCO DE DADOS 1 - CONECTACARD, BIOSITEAI & START MKT LOCAL:
+O BiositeAi é um mini site inteligente com biosite interativo, atendente virtual LIA com IA, cartões NFC e plaquinhas com QR Code.
 Serviços: Criação de Sites profissionais, Cartão NFC Infinito personalizado, Plaquinhas NFC e QR Code, Placas de avaliação do Google (AvaliaCard), Biosite com atendente virtual e IA, Gestão de Perfil Google Meu Negócio, SEO e Tráfego Pago.
 Empresa localizada em Ponta Porã (MS), atendendo presencialmente toda a fronteira e enviando cartões para todo o Brasil via Correios.
 Contato Conectacard: WhatsApp (67) 99317-4612, Site: https://www.startmktlocal.com.br/
+
+NOSSOS PREÇOS BIOSITEAI:
+1. Biosites sem Chatbot somente o link: Preço promocional R$ 99,00
+2. Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.
+Sempre que perguntarem sobre preços, valores, planos ou quanto custa o biosite/cartão, informe esses dois planos com os valores exatos!
 
 BANCO DE DADOS 2 - SUPERLIMPO PRODUTOS DE LIMPEZA:
 Somos a Superlimpo vendemos produtos de limpeza.
@@ -199,8 +204,10 @@ DIRETRIZES CRÍTICAS:
     reply = "O Cartão NFC Conectacard possui chip por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!";
   } else if (q.includes("servico") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
     reply = "A Start Mkt Local e Conectacard oferecem: Criação de Sites profissionais, Cartão NFC Infinito personalizado, Plaquinhas QR Code/NFC, AvaliaCard (avaliações 5 estrelas no Google), Gestão de Perfil Google, SEO e Tráfego Pago. Além disso, temos a distribuidora Superlimpo de produtos de limpeza direto de fábrica!";
-  } else if (q.includes("preco do cartao") || q.includes("valor do cartao") || q.includes("quanto custa o cartao")) {
-    reply = "O Cartão NFC Conectacard individual sai a partir de R$ 149 (pagamento único). Para mais detalhes e modelos personalizados, fale conosco no WhatsApp!";
+  } else if (q.includes("quanto custa") || q.includes("preco") || q.includes("valor") || q.includes("tabela") || q.includes("orcamento") || q.includes("plano") || q.includes("promocao") || q.includes("quanto e")) {
+    reply = "Nossos Preços:\n\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
+  } else if (q.includes("biosite") || q.includes("biositeai") || q.includes("mini site")) {
+    reply = "O BiositeAi é um mini site inteligente completo com atendente virtual LIA com inteligência artificial, cartões NFC e plaquinhas com QR Code!\n\nNossos Preços:\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
   } else if (q.includes("contato") || q.includes("whatsapp") || q.includes("telefone") || q.includes("falar") || q.includes("humano")) {
     reply = "Para atendimento de produtos de limpeza Superlimpo: WhatsApp https://api.whatsapp.com/send?phone=5567998342469 (67) 99834-2469. Para Cartões NFC e serviços de marketing: WhatsApp (67) 99317-4612.";
   }
