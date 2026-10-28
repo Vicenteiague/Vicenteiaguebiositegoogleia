@@ -101,10 +101,12 @@ export function ChatAssistant({ data }: ChatAssistantProps) {
   const sugestoes = [
     "Quais são os serviços?",
     "Quanto custa?",
+    "Criação de Sites",
+    "Biosite com IA",
+    "AvaliaCard",
     "Qual o site da Superlimpo?",
-    "Quero falar com alguém",
-    "Como funciona o cartão NFC?",
     "Produtos Superlimpo",
+    "Como funciona o cartão NFC?",
   ];
 
   // Auto-scroll on new message
@@ -229,6 +231,73 @@ Peça o seu pelo WhatsApp: https://wa.me/5567993174612`;
       return TABELA_COMPLETA_SUPERLIMPO;
     }
 
+    // --- START MKT LOCAL & LIA: SERVIÇOS E CATÁLOGO ESPECÍFICOS ---
+
+    // A. Criação de Sites
+    if (q.includes("criacao de site") || q.includes("criar site") || q.includes("fazer site") || (q.includes("site") && (q.includes("empresa") || q.includes("quanto") || q.includes("desenvolv") || q.includes("preco") || q.includes("valor")) && !q.includes("superlimpo") && !q.includes("link do site") && !q.includes("qual o site"))) {
+      return "Criação de Sites para empresas em geral com destaque total no meio digital!\n\nPrazo de entrega: apenas 7 dias. Valor: a partir de R$ 500,00.\n\nQuer que eu te mostre como estruturar o site ideal para a sua empresa? Me chame no WhatsApp: https://wa.me//5567993174512";
+    }
+
+    // B. Biosites com atendimento Virtual (IA 24h)
+    if (
+      (q.includes("biosite") && (q.includes("virtual") || q.includes("ia") || q.includes("inteligente") || q.includes("atendimento") || q.includes("167"))) ||
+      (q.includes("atendimento virtual") && !q.includes("superlimpo"))
+    ) {
+      return "Criação de Biosites com atendimento 24h por agentes de IA treinados para saber tudo da sua empresa!\n\nValor: R$ 167,00 + R$ 50,00/mês de manutenção do Agente de IA. Modelo de demonstração: https://vicenteiaguebiositegoogleia.vercel.app/\n\nQuer ter um biosite inteligente atendendo seus clientes 24 horas por dia?";
+    }
+
+    // C. Avaliacard (Cartão NFC / QR Code de Avaliação Google)
+    if (q.includes("avaliacard") || q.includes("avaliacao do google") || q.includes("avaliacoes no google") || (q.includes("avaliacao") && q.includes("google"))) {
+      return "AvaliaCard: Cartão NFC e QR Code com link direto na página de avaliação 5 estrelas da sua empresa no Google!\n\nValor: apenas R$ 89,00 + Frete grátis para todo o Brasil. Conheça no site: https://avaliacard.vercel.app/\n\nQuer multiplicar a confiança e as avaliações do seu negócio no Google?";
+    }
+
+    // D. Gestor Google Meu Negócio
+    if (q.includes("google meu negocio") || q.includes("perfil de empresa no google") || q.includes("perfil do google") || (q.includes("gestor") && q.includes("google"))) {
+      return "Gestor Google Meu Negócio: criação e gestão profissional do perfil da sua empresa no Google para atrair clientes locais em todo o Brasil!\n\nValor: R$ A combinar.\n\nPodemos fazer um diagnóstico gratuito do seu perfil hoje? Fale comigo: https://wa.me//5567993174512";
+    }
+
+    // E. Gestor de Tráfego Meta Ads
+    if (q.includes("meta ads") || q.includes("trafego") || q.includes("anuncio no instagram") || q.includes("anuncios no facebook") || q.includes("campanhas")) {
+      return "Gestor de Tráfego Meta Ads: criação e otimização de campanhas de marketing de alta conversão no Instagram e Facebook para empresas de todo o Brasil!\n\nValor: R$ A combinar.\n\nQuer atrair um fluxo constante de clientes prontos para comprar no seu WhatsApp? Chame aqui: https://wa.me//5567993174512";
+    }
+
+    // F. Criação de Agente de IA para WhatsApp
+    if ((q.includes("agente") && q.includes("ia")) || q.includes("ia no whatsapp") || q.includes("ia para whatsapp") || q.includes("robo de whatsapp") || q.includes("bot whatsapp")) {
+      return "Criação de Agente de IA para atendimento no WhatsApp da sua empresa: atendimento 24h com conhecimento total do catálogo e sem filas!\n\nValor: R$ A combinar.\n\nQuer ver uma demonstração prática de como a IA pode vender por você no WhatsApp? Me envie uma mensagem: https://wa.me//5567993174512";
+    }
+
+    // --- QUEBRA DE OBJEÇÕES E FAQ GERAIS ---
+
+    // G. Desconto se fechar hoje / PIX
+    if (q.includes("desconto") || q.includes("fechar hoje") || (q.includes("pix") && (q.includes("desconto") || q.includes("a vista")))) {
+      return "No pagamento via PIX já aplicamos 5% de desconto imediato!\n\nSe você quiser fechar um pacote com mais de um item, posso chamar nosso especialista no WhatsApp para liberar uma condição especial para você: https://wa.me//5567993174512\n\nQual serviço você tem interesse em contratar?";
+    }
+
+    // H. Garantia
+    if (q.includes("garantia")) {
+      return "Você tem 15 dias de garantia total! Se tiver qualquer problema, resolvemos sem nenhuma burocracia.\n\nPodemos iniciar o seu projeto com total segurança? Me avise por aqui ou no WhatsApp: https://wa.me//5567993174512";
+    }
+
+    // I. Objeção: Achei o valor alto / Vou pensar / Caro
+    if (q.includes("alto") || q.includes("caro") || q.includes("vou pensar") || q.includes("pensar") || q.includes("depois vejo")) {
+      return "Entendo perfeitamente! Mas vale lembrar que todos os nossos produtos são de alto desempenho para alavancagem dos Negócios Locais, o que economiza tempo e dinheiro para você.\n\nQuer que eu te mostre a opção de parcelamento em até 3x sem juros para caber tranquilo no seu orçamento?";
+    }
+
+    // J. Formas de pagamento
+    if (q.includes("forma de pagamento") || q.includes("formas de pagamento") || q.includes("pagar") || q.includes("parcela") || q.includes("cartao") || q.includes("pix")) {
+      return "Nossas formas de pagamento são bem flexíveis:\n\n• PIX (com 5% de desconto imediato!)\n• Cartão de Crédito em até 3x sem juros\n• Cartão de Débito\n\nQual opção fica mais confortável para o seu momento?";
+    }
+
+    // K. Horário de funcionamento Start Mkt Local
+    if (q.includes("horario de funcionamento") || q.includes("que horas abre") || q.includes("expediente") || (q.includes("horario") && (q.includes("atendimento") || q.includes("start")))) {
+      return "Nosso horário de funcionamento na Start Mkt Local é de Segunda a Sexta, das 08h às 18h | Sábado, das 08h às 12h.\n\nComo posso ajudar você agora? Se preferir, fale direto no WhatsApp: https://wa.me//5567993174512";
+    }
+
+    // L. Quem somos / Start Mkt Local
+    if (q.includes("start mkt") || q.includes("start marketing") || (q.includes("quem e") && q.includes("start"))) {
+      return "A Start Mkt Local é uma agência de marketing digital sediada em Ponta Porã (MS), atuando em todo o Brasil. Desenvolvemos sites, biosites com IA, cartões NFC, gestão de tráfego e perfis no Google!\n\nWebsite: https://www.startmktlocal.com.br/\nWhatsApp: https://wa.me//5567993174512\n\nQual área a sua empresa deseja impulsionar hoje?";
+    }
+
     // 7. Conectacard / BiositeAi: Preços, Valores, Planos, Orçamento
     if (
       q.includes("quanto custa") ||
@@ -252,36 +321,42 @@ Peça o seu pelo WhatsApp: https://wa.me/5567993174612`;
 
     // 9. Serviços oferecidos
     if (q.includes("servico") || q.includes("quais sao os servicos") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
-      return "A Start Mkt Local e a Conectacard oferecem:\n\n• Cartões NFC Infinitos e Plaquinhas QR Code personalizadas\n• Criação de Sites profissionais e Landing Pages\n• Otimização de Perfil de Empresas no Google (Google Meu Negócio)\n• AvaliaCard: Placa NFC para avaliações 5 estrelas no Google (https://avaliacard.vercel.app/)\n• Gestão de Tráfego Pago (anúncios no Google e Meta)\n• SEO para ranqueamento no Google em Ponta Porã e região\n• Linha Superlimpo de produtos de limpeza direto de fábrica!\n\nFale conosco no WhatsApp: https://wa.me/5567993174612";
+      return "A Start Mkt Local e a Conectacard oferecem soluções completas para alavancar seu negócio:\n\n• Cartões NFC Infinitos e Plaquinhas QR Code\n• Criação de Sites profissionais (a partir de R$ 500,00)\n• Biosite com atendimento Virtual de IA 24h (R$ 167,00)\n• Gestor Google Meu Negócio e Tráfego Meta Ads\n• AvaliaCard para avaliações 5 estrelas no Google (R$ 89,00)\n• Linha Superlimpo de produtos de limpeza direto de fábrica!\n\nQual dessas soluções mais te interessa?";
     }
 
     // 10. Como funciona o Cartão NFC
     if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("funciona o cartao") || q.includes("como usa")) {
-      return "O Cartão NFC Conectacard possui tecnologia por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!";
+      return "O Cartão NFC Conectacard possui tecnologia por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!\n\nQuer personalizar um cartão com a sua marca?";
     }
 
     // 11. Contatos / WhatsApp
     if (q.includes("falar com alguem") || q.includes("humano") || q.includes("atendente") || q.includes("whatsapp") || q.includes("contato") || q.includes("telefone")) {
-      return "Com certeza! Nossos canais de atendimento:\n\n💳 Para Cartões NFC, Biosite e Serviços Start Mkt: WhatsApp (67) 99317-4612 | https://wa.me/5567993174612\n\n🧼 Para Produtos de Limpeza Superlimpo: WhatsApp (67) 99834-2469 | https://api.whatsapp.com/send?phone=5567998342469";
+      return "Com certeza! Nossos canais de atendimento direto:\n\n💳 Start Mkt Local & Conectacard: WhatsApp https://wa.me//5567993174512\n\n🧼 Superlimpo Produtos de Limpeza: WhatsApp https://api.whatsapp.com/send?phone=5567998342469\n\nEm qual desses assuntos posso te direcionar agora?";
     }
 
     // 12. Entregas e frete gerais
     if (q.includes("entrega") || q.includes("frete") || q.includes("onde entrega") || q.includes("fronteira") || q.includes("correios") || q.includes("envio")) {
-      return "• Produtos de limpeza Superlimpo: entregas até às 16h (sábados às 7h e 15:30h) em Ponta Porã e Pedro Juan Caballero.\n• Cartões NFC e Plaquinhas: envio para todo o Brasil via Correios com código de rastreamento!";
+      return "• Produtos de limpeza Superlimpo: entregas até às 16h (sábados às 7h e 15:30h) em Ponta Porã e Pedro Juan Caballero.\n• Cartões NFC, Plaquinhas e AvaliaCard: envio para todo o Brasil via Correios com código de rastreamento!\n\nQual o seu CEP ou cidade para verificarmos?";
     }
 
     // 13. Endereço e localização
     if (q.includes("onde") || q.includes("endereco") || q.includes("localizacao") || q.includes("cidade") || q.includes("fica") || q.includes("mapa")) {
-      return "Estamos localizados em Ponta Porã, MS (Start Mkt Local - Rua Luiz Pinto Magalhães, 154 - Santa Isabel). Atendemos presencialmente toda a região de fronteira e o Brasil inteiro de forma digital!\n\nVeja no Google Maps: https://www.google.com/maps/search/?api=1&query=Start+Mkt+Local+-+Rua+Luiz+Pinto+Magalh%C3%A3es,+154+-+Santa+Isabel,+Ponta+Por%C3%A3+-+MS";
+      return "Estamos localizados em Ponta Porã, MS (Start Mkt Local - Rua Luiz Pinto Magalhães, 154 - Santa Isabel). Atendemos presencialmente toda a região de fronteira e o Brasil inteiro de forma digital!\n\nVeja no Google Maps: https://www.google.com/maps/search/?api=1&query=Start+Mkt+Local+-+Rua+Luiz+Pinto+Magalh%C3%A3es,+154+-+Santa+Isabel,+Ponta+Por%C3%A3+-+MS\n\nQuer agendar uma conversa ou consultoria?";
     }
 
     // 14. Personalização de cartões
     if (q.includes("personaliz") || q.includes("logo") || q.includes("arte") || q.includes("minha marca") || q.includes("impressao")) {
-      return "Sim! Nossos cartões e plaquinhas são 100% personalizados com o logotipo, cores e identidade visual da sua marca com acabamento premium de alta durabilidade. Fale conosco: https://wa.me/5567993174612";
+      return "Sim! Nossos cartões e plaquinhas são 100% personalizados com o logotipo, cores e identidade visual da sua marca com acabamento premium de alta durabilidade.\n\nFale conosco pelo WhatsApp para enviar sua logo: https://wa.me//5567993174512\n\nVocê já tem a arte pronta ou precisa de ajuda?";
     }
 
-    // 15. Regra obrigatória: Se não souber com certeza, passar para o atendimento humano com o link
-    return "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469";
+    // 15. Regra de Ouro (Guardrails):
+    // Se o cliente perguntar algo sobre produtos de limpeza não identificados:
+    if (isSuperlimpoQuery) {
+      return "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469";
+    }
+
+    // Para serviços ou dúvidas gerais não cadastradas:
+    return "Para te confirmar esse detalhe específico sem erro, vou te passar o contato direto do nosso especialista: https://wa.me//5567993174512";
   };
 
   const handleSend = async (textToSend?: string) => {
@@ -335,7 +410,9 @@ Peça o seu pelo WhatsApp: https://wa.me/5567993174612`;
 
     // 3. Fast-path: Direct smart match from database (Instant and 100% accurate, no waiting, no timeouts)
     const directSmartResponse = findSmartResponse(query);
-    const isHumanFallback = directSmartResponse.startsWith("Vou passar para o atendimento humano");
+    const isHumanFallback =
+      directSmartResponse.startsWith("Vou passar para o atendimento humano") ||
+      directSmartResponse.startsWith("Para te confirmar esse detalhe específico");
 
     // If we have a verified database match (not fallback), answer immediately without making the user wait!
     if (!isHumanFallback) {

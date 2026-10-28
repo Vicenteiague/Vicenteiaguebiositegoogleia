@@ -107,12 +107,70 @@ Linha empresas:
 - Brilho alumínio 5 litros: R$ 30,00
 - Shampoo Automotivo 5 litros: R$ 30,00
 - Desengraxante Automotivo 5 litros: R$ 30,00
-- Ativado 5L: R$ 30,00
+BANCO DE DADOS 3 - START MKT LOCAL & AGENTE LIA (NOVO CONHECIMENTO):
+1. IDENTIDADE E OBJETIVO:
+- Nome do Agente: LIA
+- Empresa: Start Mkt Local
+- Papel: Especialista de atendimento e vendas.
+- Tom de Voz: Direto, simpático, consultivo e focado em conversão (mensagens curtas, ideais para leitura no celular).
+- Objetivo Principal: Tirar dúvidas sobre o catálogo e conduzir o cliente para o fechamento no WhatsApp.
 
-DIRETRIZES CRÍTICAS:
-- NÃO INVENTAR. NÃO ALUCINAR.
-- SE NÃO SOUBER a resposta com certeza absoluta, diga exatamente: "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469".
-- Seja sempre educada, prestativa e concisa.`;
+2. DADOS DA EMPRESA (Fatos Gerais):
+- O que fazemos: Agência de marketing digital
+- Localização: Ponta Porã MS atuamos em todo Brasil
+- Horário de Funcionamento: Segunda a Sexta, das 08h às 18h | Sábado, das 08h às 12h.
+- Formas de Pagamento: PIX, Cartão em até 3x sem juros, Cartão de Débito.
+- Link de Contato/WhatsApp: https://wa.me//5567993174512
+- Link de Contato/Website: https://www.startmktlocal.com.br/
+
+3. CATÁLOGO DE PRODUTOS E SERVIÇOS:
+• Produto/Serviço 1: Criação de Sites
+  - Para quem é indicado: Empresas em geral
+  - O que inclui: Destaque no meio digital
+  - Prazo de entrega: 7 dias
+  - Valor: A partir R$ 500,00
+
+• Produto/Serviço 2: Gestor Google meu Negócio
+  - Para quem é indicado: Empresas de todo o Brasil
+  - O que inclui: Criação e gestão de perfis de empresas no Google
+  - Valor: R$ A combinar
+
+• Produto/Serviço 3: Criação de Biosites com atendimento Virtual
+  - Modelo de Biosite: https://vicenteiaguebiositegoogleia.vercel.app/
+  - Para quem é indicado: Empresas de todo o Brasil
+  - O que inclui: Criação de Biosites com atendimento 24 hrs por agentes de IA treinado para saber tudo da sua empresa
+  - Valor: R$ 167,00 mais R$ 50,00 Mês de manutenção do Agente de IA
+
+• Produto/Serviço 4: Gestor de tráfego Meta Ads
+  - Para quem é indicado: Empresas de todo o Brasil
+  - O que inclui: Criação de campanhas de marketing na Meta Ads
+  - Valor: R$ A combinar
+
+• Produto/Serviço 5: Criação de Agente de IA para atendimento no whatsapp
+  - Para quem é indicado: Empresas de todo o Brasil
+  - O que inclui: Criação de Agentes de IA no whatsapp da empresa responsável pelo atendimento e conhecimento total da empresa
+  - Valor: R$ A combinar
+
+• Produto/Serviço 6: Criação do Avaliacard cartão NFC e QR Code de avaliação do Google
+  - Website: https://avaliacard.vercel.app/
+  - Para quem é indicado: Empresas de todo o Brasil
+  - O que inclui: Criação do cartão NFC e QR Code com link direto na página de avaliação do Google
+  - Valor: R$ 89,00 + Frete grátis
+
+4. FAQ E QUEBRA DE OBJEÇÕES:
+- Pergunta: Vocês dão desconto se eu fechar hoje?
+  Resposta: No pagamento via PIX já aplicamos 5% de desconto imediato! Se você quiser fechar um pacote com mais de um item, posso chamar nosso especialista no WhatsApp para liberar uma condição especial para você.
+- Pergunta: Como funciona a garantia?
+  Resposta: Você tem 15 dias de garantia total. Se tiver qualquer problema, resolvemos sem burocracia.
+- Pergunta: Achei o valor alto / Vou pensar.
+  Resposta: Entendo perfeitamente! Mas vale lembrar que todos os nossos produtos são de alto desempenho para alavancagem dos Negócios Locais, o que economiza tempo e dinheiro para você. Quer que eu te mostre a opção de parcelamento para caber tranquilo no seu orçamento?
+
+5. REGRAS DE OURO (Guardrails):
+1. Fidelidade aos Dados: Responda APENAS com base nas informações acima. Se o cliente perguntar algo sobre a empresa ou serviços que não esteja neste documento, diga exatamente: "Para te confirmar esse detalhe específico sem erro, vou te passar o contato direto do nosso especialista: https://wa.me//5567993174512".
+2. Se o cliente perguntar algo desconhecido sobre produtos de limpeza, diga: "Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469".
+3. Proibido Inventar: Nunca invente preços, prazos, promoções ou serviços que não estejam especificados.
+4. Formatação: Nunca envie blocos gigantes de texto. Use no máximo 3 linhas por parágrafo e termine sempre com uma pergunta que leve o cliente para o próximo passo.
+5. Todos os links que enviar devem ser CLICÁVEIS (URLs completas iniciadas com https://).`;
 
       const contents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
 
@@ -204,7 +262,7 @@ Linha Empresas:
 📲 Peça pelo WhatsApp: https://api.whatsapp.com/send?phone=5567998342469
 🌐 Nosso Site: https://superlimpoprodutosdelimpeza.lovable.app/`;
 
-  let reply = 'Vou passar para o atendimento humano: https://api.whatsapp.com/send?phone=5567998342469';
+  let reply = "Para te confirmar esse detalhe específico sem erro, vou te passar o contato direto do nosso especialista: https://wa.me//5567993174512";
 
   if (q.includes("horario") || q.includes("que horas") || q.includes("sabado") || (q.includes("entrega") && (q.includes("hora") || q.includes("quando")))) {
     reply = "As entregas da Superlimpo são feitas até às 16 horas. Aos sábados somente às 7:00 horas e às 15:30 horas em Ponta Porã e Pedro Juan Caballero.";
@@ -232,16 +290,26 @@ Linha Empresas:
     q.includes("kit")
   ) {
     reply = TABELA_COMPLETA_SUPERLIMPO;
+  } else if (q.includes("criacao de site") || q.includes("criar site") || (q.includes("site") && (q.includes("quanto") || q.includes("preco")) && !q.includes("superlimpo"))) {
+    reply = "Criação de Sites para empresas com destaque total no meio digital!\n\nPrazo de entrega: apenas 7 dias. Valor: a partir de R$ 500,00.\n\nQuer que eu te mostre como estruturar o site ideal para a sua empresa? Me chame no WhatsApp: https://wa.me//5567993174512";
+  } else if (q.includes("avaliacard")) {
+    reply = "AvaliaCard: Cartão NFC e QR Code com link direto na página de avaliação 5 estrelas da sua empresa no Google!\n\nValor: apenas R$ 89,00 + Frete grátis para todo o Brasil. Conheça no site: https://avaliacard.vercel.app/\n\nQuer multiplicar as avaliações da sua empresa no Google?";
+  } else if (q.includes("desconto") || q.includes("fechar hoje")) {
+    reply = "No pagamento via PIX já aplicamos 5% de desconto imediato!\n\nSe você quiser fechar um pacote com mais de um item, posso chamar nosso especialista no WhatsApp para liberar uma condição especial para você: https://wa.me//5567993174512\n\nQual serviço você tem interesse em contratar?";
+  } else if (q.includes("garantia")) {
+    reply = "Você tem 15 dias de garantia total! Se tiver qualquer problema, resolvemos sem burocracia.\n\nPodemos iniciar o seu projeto com total segurança? Me avise no WhatsApp: https://wa.me//5567993174512";
+  } else if (q.includes("alto") || q.includes("caro") || q.includes("pensar")) {
+    reply = "Entendo perfeitamente! Mas vale lembrar que todos os nossos produtos são de alto desempenho para alavancagem dos Negócios Locais, o que economiza tempo e dinheiro para você.\n\nQuer que eu te mostre a opção de parcelamento em até 3x sem juros para caber no seu orçamento?";
   } else if (q.includes("como funciona") || q.includes("nfc") || q.includes("aproximac") || q.includes("cartao nfc") || q.includes("funciona o cartao")) {
-    reply = "O Cartão NFC Conectacard possui chip por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!";
+    reply = "O Cartão NFC Conectacard possui chip por aproximação. Basta encostar o cartão na parte traseira de qualquer celular moderno com NFC (iPhone ou Android) e o seu biosite abre na hora com seus contatos, catálogo e redes sociais, sem precisar instalar nenhum aplicativo!\n\nQuer personalizar um para você?";
   } else if (q.includes("servico") || q.includes("o que a empresa oferece") || q.includes("o que voces fazem")) {
-    reply = "A Start Mkt Local e Conectacard oferecem: Criação de Sites profissionais, Cartão NFC Infinito personalizado, Plaquinhas QR Code/NFC, AvaliaCard (avaliações 5 estrelas no Google: https://avaliacard.vercel.app/), Gestão de Perfil Google, SEO e Tráfego Pago. Além disso, temos a distribuidora Superlimpo de produtos de limpeza direto de fábrica!\nWhatsApp Conectacard: (67) 99317-4612.";
+    reply = "A Start Mkt Local e Conectacard oferecem: Criação de Sites (a partir de R$ 500,00), Biosite com IA 24h (R$ 167,00), Cartão NFC Infinito personalizado, Plaquinhas QR Code/NFC, AvaliaCard (avaliações Google: https://avaliacard.vercel.app/), Gestão Google Meu Negócio e Tráfego Meta Ads. Além da linha Superlimpo de produtos de limpeza direto de fábrica!\n\nQual desses serviços sua empresa precisa hoje?";
   } else if (q.includes("quanto custa") || q.includes("preco") || q.includes("valor") || q.includes("tabela") || q.includes("orcamento") || q.includes("plano") || q.includes("promocao") || q.includes("quanto e")) {
     reply = "Nossos Preços:\n\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
   } else if (q.includes("biosite") || q.includes("biositeai") || q.includes("mini site")) {
     reply = "O BiositeAi é um mini site inteligente completo com atendente virtual LIA com inteligência artificial, cartões NFC e plaquinhas com QR Code!\n\nNossos Preços:\n1️⃣ Biosites sem Chatbot somente o link: Preço promocional R$ 99,00\n2️⃣ Biosites com Chatbot e atendente Virtual + Plaquinha NFC ou Cartão NFC: R$ 147,00 + manutenção do Chatbot Atendente virtual IA a partir de R$ 49,90 Mês.\n\nPeça o seu pelo WhatsApp: https://wa.me/5567993174612";
   } else if (q.includes("contato") || q.includes("whatsapp") || q.includes("telefone") || q.includes("falar") || q.includes("humano")) {
-    reply = "Para atendimento de produtos de limpeza Superlimpo: WhatsApp https://api.whatsapp.com/send?phone=5567998342469 (67) 99834-2469. Para Cartões NFC e serviços de marketing: WhatsApp (67) 99317-4612.";
+    reply = "Para Start Mkt Local e Conectacard: WhatsApp https://wa.me//5567993174512\nPara Superlimpo produtos de limpeza: WhatsApp https://api.whatsapp.com/send?phone=5567998342469\n\nQual deles você precisa falar agora?";
   }
 
   if (responseCache.size >= MAX_CACHE_SIZE) {
